@@ -1,0 +1,28 @@
+{
+  "dataset": "stl10",
+  "seed": 6304,
+  "translation_delta_used": 32,
+  "models": {
+    "resnet50": {
+      "i_t_grayscale": 0.7880700826644897,
+      "i_t_translation_32px_avg": 0.9240432232618332,
+      "i_t_patch_shuffle": 0.688475489616394,
+      "i_t_cue_conflict": 0.4246670603752136,
+      "tsne_figure": "results/figures/tsne_resnet50_clean_vs_patchshuffle.png"
+    },
+    "vit_b_16": {
+      "i_t_grayscale": 0.7375083565711975,
+      "i_t_translation_32px_avg": 0.9217309206724167,
+      "i_t_patch_shuffle": 0.668458878993988,
+      "i_t_cue_conflict": 0.4319705069065094,
+      "tsne_figure": "results/figures/tsne_vit_b_16_clean_vs_patchshuffle.png"
+    },
+    "clip_vit_b_32": {
+      "i_t_grayscale": 0.8951007723808289,
+      "i_t_translation_32px_avg": 0.9702251106500626,
+      "i_t_patch_shuffle": 0.7327264547348022,
+      "i_t_cue_conflict": 0.7505518794059753,
+      "tsne_figure": "results/figures/tsne_clip_vit_b_32_clean_vs_patchshuffle.png"
+    }
+  }
+}
