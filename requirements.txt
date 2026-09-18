@@ -1,0 +1,12 @@
+torch>=2.1
+torchvision>=0.16
+open_clip_torch>=2.24
+numpy
+scipy
+scikit-learn
+pandas
+matplotlib
+pyyaml
+tqdm
+umap-learn
+Pillow

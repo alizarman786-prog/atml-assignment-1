@@ -1,0 +1,25 @@
+# Task 1, Step 1: Clean Baseline
+# Evaluate the three classifier heads + zero-shot CLIP on the clean eval subset.
+
+dataset: stl10          # stl10 | pets
+data_root: ./data
+splits_path: results/splits/stl10_splits_seed6304.json
+seed: 6304
+
+backbones:
+  - resnet50
+  - vit_b_16
+  - clip_vit_b_32
+
+head_training:
+  max_epochs: 50
+  optimizer: adamw
+  lr: 1.0e-3
+  weight_decay: 1.0e-4
+  early_stopping_patience: 5   # epochs without val-accuracy improvement
+
+clip_zero_shot:
+  prompt_template: "a photo of a {}."
+
+output:
+  results_json: results/clean_baseline_seed6304.json

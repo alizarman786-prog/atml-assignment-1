@@ -1,0 +1,36 @@
+# Downloaded/raw datasets (kept OUT of the "data/" source-code folders used
+# by task1/ and task4/ for scripts like make_subset.py - only the actual
+# cached dataset files live under data_raw/, never committed).
+data_raw/
+**/data_raw/
+*.tar
+*.tar.gz
+*.zip
+
+# Environments
+.venv/
+venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Experiment tracking / large artifacts
+wandb/
+checkpoints/
+*.pth
+*.pt
+*.ckpt
+
+# Cached features/logits (task4 cache) - keep small json/csv summaries only
+task4/cache/*
+!task4/cache/.gitkeep
+
+# OS/editor
+.DS_Store
+.vscode/
+.idea/
+
+# Report build artifacts
+report/*.aux
+report/*.log
+report/*.out
