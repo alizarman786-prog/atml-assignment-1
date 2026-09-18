@@ -1,0 +1,92 @@
+{
+  "dataset": "stl10",
+  "seed": 6304,
+  "displacements": [
+    0,
+    8,
+    16,
+    32
+  ],
+  "models": {
+    "resnet50": {
+      "head_by_delta": {
+        "0": {
+          "accuracy": 0.972,
+          "consistency": 1.0
+        },
+        "8": {
+          "accuracy": 0.969,
+          "consistency": 0.989
+        },
+        "16": {
+          "accuracy": 0.9684999999999999,
+          "consistency": 0.986
+        },
+        "32": {
+          "accuracy": 0.9644999999999999,
+          "consistency": 0.9844999999999999
+        }
+      }
+    },
+    "vit_b_16": {
+      "head_by_delta": {
+        "0": {
+          "accuracy": 0.99,
+          "consistency": 1.0
+        },
+        "8": {
+          "accuracy": 0.9855,
+          "consistency": 0.994
+        },
+        "16": {
+          "accuracy": 0.988,
+          "consistency": 0.994
+        },
+        "32": {
+          "accuracy": 0.982,
+          "consistency": 0.9884999999999999
+        }
+      }
+    },
+    "clip_vit_b_32": {
+      "head_by_delta": {
+        "0": {
+          "accuracy": 0.972,
+          "consistency": 1.0
+        },
+        "8": {
+          "accuracy": 0.9735,
+          "consistency": 0.9775
+        },
+        "16": {
+          "accuracy": 0.964,
+          "consistency": 0.968
+        },
+        "32": {
+          "accuracy": 0.9684999999999999,
+          "consistency": 0.9775
+        }
+      }
+    },
+    "clip_zero_shot": {
+      "by_delta": {
+        "0": {
+          "accuracy": 0.954,
+          "consistency": 1.0
+        },
+        "8": {
+          "accuracy": 0.944,
+          "consistency": 0.9695
+        },
+        "16": {
+          "accuracy": 0.9380000000000001,
+          "consistency": 0.958
+        },
+        "32": {
+          "accuracy": 0.94,
+          "consistency": 0.972
+        }
+      }
+    }
+  }
+}
