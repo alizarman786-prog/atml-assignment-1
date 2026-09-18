@@ -1,0 +1,278 @@
+{
+  "dataset": "stl10",
+  "seed": 6304,
+  "models": {
+    "resnet50": {
+      "n_shape": 142,
+      "n_texture": 59,
+      "n_other": 49,
+      "n_total": 250,
+      "shape_bias_pct": 70.64676616915423,
+      "coverage_pct": 80.4,
+      "sample_agreements": [
+        {
+          "filename": "cat_shape__dog_texture_001.png",
+          "content_class": "cat",
+          "style_class": "dog",
+          "predicted_class": "cat"
+        },
+        {
+          "filename": "cat_shape__dog_texture_002.png",
+          "content_class": "cat",
+          "style_class": "dog",
+          "predicted_class": "cat"
+        },
+        {
+          "filename": "cat_shape__dog_texture_003.png",
+          "content_class": "cat",
+          "style_class": "dog",
+          "predicted_class": "cat"
+        }
+      ],
+      "sample_disagreements": [
+        {
+          "filename": "dog_shape__cat_texture_000.png",
+          "content_class": "dog",
+          "style_class": "cat",
+          "predicted_class": "cat"
+        },
+        {
+          "filename": "dog_shape__cat_texture_009.png",
+          "content_class": "dog",
+          "style_class": "cat",
+          "predicted_class": "cat"
+        },
+        {
+          "filename": "dog_shape__cat_texture_013.png",
+          "content_class": "dog",
+          "style_class": "cat",
+          "predicted_class": "cat"
+        }
+      ],
+      "sample_other_failures": [
+        {
+          "filename": "cat_shape__dog_texture_000.png",
+          "content_class": "cat",
+          "style_class": "dog",
+          "predicted_class": "bird"
+        },
+        {
+          "filename": "cat_shape__dog_texture_004.png",
+          "content_class": "cat",
+          "style_class": "dog",
+          "predicted_class": "bird"
+        },
+        {
+          "filename": "cat_shape__dog_texture_006.png",
+          "content_class": "cat",
+          "style_class": "dog",
+          "predicted_class": "bird"
+        }
+      ]
+    },
+    "vit_b_16": {
+      "n_shape": 188,
+      "n_texture": 34,
+      "n_other": 28,
+      "n_total": 250,
+      "shape_bias_pct": 84.68468468468468,
+      "coverage_pct": 88.8,
+      "sample_agreements": [
+        {
+          "filename": "cat_shape__dog_texture_000.png",
+          "content_class": "cat",
+          "style_class": "dog",
+          "predicted_class": "cat"
+        },
+        {
+          "filename": "cat_shape__dog_texture_001.png",
+          "content_class": "cat",
+          "style_class": "dog",
+          "predicted_class": "cat"
+        },
+        {
+          "filename": "cat_shape__dog_texture_002.png",
+          "content_class": "cat",
+          "style_class": "dog",
+          "predicted_class": "cat"
+        }
+      ],
+      "sample_disagreements": [
+        {
+          "filename": "cat_shape__dog_texture_006.png",
+          "content_class": "cat",
+          "style_class": "dog",
+          "predicted_class": "dog"
+        },
+        {
+          "filename": "dog_shape__cat_texture_000.png",
+          "content_class": "dog",
+          "style_class": "cat",
+          "predicted_class": "cat"
+        },
+        {
+          "filename": "dog_shape__cat_texture_010.png",
+          "content_class": "dog",
+          "style_class": "cat",
+          "predicted_class": "cat"
+        }
+      ],
+      "sample_other_failures": [
+        {
+          "filename": "cat_shape__dog_texture_004.png",
+          "content_class": "cat",
+          "style_class": "dog",
+          "predicted_class": "bird"
+        },
+        {
+          "filename": "cat_shape__dog_texture_008.png",
+          "content_class": "cat",
+          "style_class": "dog",
+          "predicted_class": "monkey"
+        },
+        {
+          "filename": "cat_shape__dog_texture_010.png",
+          "content_class": "cat",
+          "style_class": "dog",
+          "predicted_class": "bird"
+        }
+      ]
+    },
+    "clip_vit_b_32": {
+      "n_shape": 190,
+      "n_texture": 29,
+      "n_other": 31,
+      "n_total": 250,
+      "shape_bias_pct": 86.7579908675799,
+      "coverage_pct": 87.6,
+      "sample_agreements": [
+        {
+          "filename": "cat_shape__dog_texture_001.png",
+          "content_class": "cat",
+          "style_class": "dog",
+          "predicted_class": "cat"
+        },
+        {
+          "filename": "cat_shape__dog_texture_002.png",
+          "content_class": "cat",
+          "style_class": "dog",
+          "predicted_class": "cat"
+        },
+        {
+          "filename": "cat_shape__dog_texture_003.png",
+          "content_class": "cat",
+          "style_class": "dog",
+          "predicted_class": "cat"
+        }
+      ],
+      "sample_disagreements": [
+        {
+          "filename": "cat_shape__dog_texture_004.png",
+          "content_class": "cat",
+          "style_class": "dog",
+          "predicted_class": "dog"
+        },
+        {
+          "filename": "cat_shape__dog_texture_007.png",
+          "content_class": "cat",
+          "style_class": "dog",
+          "predicted_class": "dog"
+        },
+        {
+          "filename": "dog_shape__cat_texture_002.png",
+          "content_class": "dog",
+          "style_class": "cat",
+          "predicted_class": "cat"
+        }
+      ],
+      "sample_other_failures": [
+        {
+          "filename": "cat_shape__dog_texture_000.png",
+          "content_class": "cat",
+          "style_class": "dog",
+          "predicted_class": "bird"
+        },
+        {
+          "filename": "cat_shape__dog_texture_010.png",
+          "content_class": "cat",
+          "style_class": "dog",
+          "predicted_class": "bird"
+        },
+        {
+          "filename": "cat_shape__dog_texture_011.png",
+          "content_class": "cat",
+          "style_class": "dog",
+          "predicted_class": "horse"
+        }
+      ]
+    },
+    "clip_zero_shot": {
+      "n_shape": 178,
+      "n_texture": 37,
+      "n_other": 35,
+      "n_total": 250,
+      "shape_bias_pct": 82.7906976744186,
+      "coverage_pct": 86.0,
+      "sample_agreements": [
+        {
+          "filename": "cat_shape__dog_texture_001.png",
+          "content_class": "cat",
+          "style_class": "dog",
+          "predicted_class": "cat"
+        },
+        {
+          "filename": "cat_shape__dog_texture_002.png",
+          "content_class": "cat",
+          "style_class": "dog",
+          "predicted_class": "cat"
+        },
+        {
+          "filename": "cat_shape__dog_texture_003.png",
+          "content_class": "cat",
+          "style_class": "dog",
+          "predicted_class": "cat"
+        }
+      ],
+      "sample_disagreements": [
+        {
+          "filename": "cat_shape__dog_texture_004.png",
+          "content_class": "cat",
+          "style_class": "dog",
+          "predicted_class": "dog"
+        },
+        {
+          "filename": "cat_shape__dog_texture_006.png",
+          "content_class": "cat",
+          "style_class": "dog",
+          "predicted_class": "dog"
+        },
+        {
+          "filename": "dog_shape__cat_texture_011.png",
+          "content_class": "dog",
+          "style_class": "cat",
+          "predicted_class": "cat"
+        }
+      ],
+      "sample_other_failures": [
+        {
+          "filename": "cat_shape__dog_texture_000.png",
+          "content_class": "cat",
+          "style_class": "dog",
+          "predicted_class": "bird"
+        },
+        {
+          "filename": "cat_shape__dog_texture_007.png",
+          "content_class": "cat",
+          "style_class": "dog",
+          "predicted_class": "deer"
+        },
+        {
+          "filename": "cat_shape__dog_texture_008.png",
+          "content_class": "cat",
+          "style_class": "dog",
+          "predicted_class": "monkey"
+        }
+      ]
+    }
+  }
+}

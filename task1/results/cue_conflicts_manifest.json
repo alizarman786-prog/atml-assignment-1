@@ -1,0 +1,2332 @@
+{
+  "seed": 6304,
+  "dataset": "stl10",
+  "class_pairs": [
+    [
+      "cat",
+      "dog"
+    ],
+    [
+      "deer",
+      "horse"
+    ],
+    [
+      "airplane",
+      "ship"
+    ],
+    [
+      "car",
+      "truck"
+    ],
+    [
+      "bird",
+      "monkey"
+    ]
+  ],
+  "rejection_rule": "reject if non-finite or std < 0.03",
+  "combo_stats": {
+    "cat_shape__dog_texture": {
+      "accepted": 25,
+      "rejected": 0,
+      "attempts": 25
+    },
+    "dog_shape__cat_texture": {
+      "accepted": 25,
+      "rejected": 0,
+      "attempts": 25
+    },
+    "deer_shape__horse_texture": {
+      "accepted": 25,
+      "rejected": 0,
+      "attempts": 25
+    },
+    "horse_shape__deer_texture": {
+      "accepted": 25,
+      "rejected": 0,
+      "attempts": 25
+    },
+    "airplane_shape__ship_texture": {
+      "accepted": 25,
+      "rejected": 0,
+      "attempts": 25
+    },
+    "ship_shape__airplane_texture": {
+      "accepted": 25,
+      "rejected": 0,
+      "attempts": 25
+    },
+    "car_shape__truck_texture": {
+      "accepted": 25,
+      "rejected": 0,
+      "attempts": 25
+    },
+    "truck_shape__car_texture": {
+      "accepted": 25,
+      "rejected": 0,
+      "attempts": 25
+    },
+    "bird_shape__monkey_texture": {
+      "accepted": 25,
+      "rejected": 0,
+      "attempts": 25
+    },
+    "monkey_shape__bird_texture": {
+      "accepted": 25,
+      "rejected": 0,
+      "attempts": 25
+    }
+  },
+  "total_accepted": 250,
+  "images": [
+    {
+      "filename": "cat_shape__dog_texture_000.png",
+      "content_class": "cat",
+      "content_label": 3,
+      "style_class": "dog",
+      "style_label": 5,
+      "content_eval_idx": 463,
+      "style_eval_idx": 88
+    },
+    {
+      "filename": "cat_shape__dog_texture_001.png",
+      "content_class": "cat",
+      "content_label": 3,
+      "style_class": "dog",
+      "style_label": 5,
+      "content_eval_idx": 468,
+      "style_eval_idx": 113
+    },
+    {
+      "filename": "cat_shape__dog_texture_002.png",
+      "content_class": "cat",
+      "content_label": 3,
+      "style_class": "dog",
+      "style_label": 5,
+      "content_eval_idx": 147,
+      "style_eval_idx": 436
+    },
+    {
+      "filename": "cat_shape__dog_texture_003.png",
+      "content_class": "cat",
+      "content_label": 3,
+      "style_class": "dog",
+      "style_label": 5,
+      "content_eval_idx": 288,
+      "style_eval_idx": 257
+    },
+    {
+      "filename": "cat_shape__dog_texture_004.png",
+      "content_class": "cat",
+      "content_label": 3,
+      "style_class": "dog",
+      "style_label": 5,
+      "content_eval_idx": 463,
+      "style_eval_idx": 338
+    },
+    {
+      "filename": "cat_shape__dog_texture_005.png",
+      "content_class": "cat",
+      "content_label": 3,
+      "style_class": "dog",
+      "style_label": 5,
+      "content_eval_idx": 118,
+      "style_eval_idx": 106
+    },
+    {
+      "filename": "cat_shape__dog_texture_006.png",
+      "content_class": "cat",
+      "content_label": 3,
+      "style_class": "dog",
+      "style_label": 5,
+      "content_eval_idx": 463,
+      "style_eval_idx": 257
+    },
+    {
+      "filename": "cat_shape__dog_texture_007.png",
+      "content_class": "cat",
+      "content_label": 3,
+      "style_class": "dog",
+      "style_label": 5,
+      "content_eval_idx": 287,
+      "style_eval_idx": 470
+    },
+    {
+      "filename": "cat_shape__dog_texture_008.png",
+      "content_class": "cat",
+      "content_label": 3,
+      "style_class": "dog",
+      "style_label": 5,
+      "content_eval_idx": 317,
+      "style_eval_idx": 338
+    },
+    {
+      "filename": "cat_shape__dog_texture_009.png",
+      "content_class": "cat",
+      "content_label": 3,
+      "style_class": "dog",
+      "style_label": 5,
+      "content_eval_idx": 10,
+      "style_eval_idx": 436
+    },
+    {
+      "filename": "cat_shape__dog_texture_010.png",
+      "content_class": "cat",
+      "content_label": 3,
+      "style_class": "dog",
+      "style_label": 5,
+      "content_eval_idx": 459,
+      "style_eval_idx": 458
+    },
+    {
+      "filename": "cat_shape__dog_texture_011.png",
+      "content_class": "cat",
+      "content_label": 3,
+      "style_class": "dog",
+      "style_label": 5,
+      "content_eval_idx": 119,
+      "style_eval_idx": 229
+    },
+    {
+      "filename": "cat_shape__dog_texture_012.png",
+      "content_class": "cat",
+      "content_label": 3,
+      "style_class": "dog",
+      "style_label": 5,
+      "content_eval_idx": 356,
+      "style_eval_idx": 1
+    },
+    {
+      "filename": "cat_shape__dog_texture_013.png",
+      "content_class": "cat",
+      "content_label": 3,
+      "style_class": "dog",
+      "style_label": 5,
+      "content_eval_idx": 288,
+      "style_eval_idx": 106
+    },
+    {
+      "filename": "cat_shape__dog_texture_014.png",
+      "content_class": "cat",
+      "content_label": 3,
+      "style_class": "dog",
+      "style_label": 5,
+      "content_eval_idx": 82,
+      "style_eval_idx": 315
+    },
+    {
+      "filename": "cat_shape__dog_texture_015.png",
+      "content_class": "cat",
+      "content_label": 3,
+      "style_class": "dog",
+      "style_label": 5,
+      "content_eval_idx": 251,
+      "style_eval_idx": 322
+    },
+    {
+      "filename": "cat_shape__dog_texture_016.png",
+      "content_class": "cat",
+      "content_label": 3,
+      "style_class": "dog",
+      "style_label": 5,
+      "content_eval_idx": 406,
+      "style_eval_idx": 150
+    },
+    {
+      "filename": "cat_shape__dog_texture_017.png",
+      "content_class": "cat",
+      "content_label": 3,
+      "style_class": "dog",
+      "style_label": 5,
+      "content_eval_idx": 10,
+      "style_eval_idx": 296
+    },
+    {
+      "filename": "cat_shape__dog_texture_018.png",
+      "content_class": "cat",
+      "content_label": 3,
+      "style_class": "dog",
+      "style_label": 5,
+      "content_eval_idx": 147,
+      "style_eval_idx": 439
+    },
+    {
+      "filename": "cat_shape__dog_texture_019.png",
+      "content_class": "cat",
+      "content_label": 3,
+      "style_class": "dog",
+      "style_label": 5,
+      "content_eval_idx": 384,
+      "style_eval_idx": 257
+    },
+    {
+      "filename": "cat_shape__dog_texture_020.png",
+      "content_class": "cat",
+      "content_label": 3,
+      "style_class": "dog",
+      "style_label": 5,
+      "content_eval_idx": 203,
+      "style_eval_idx": 470
+    },
+    {
+      "filename": "cat_shape__dog_texture_021.png",
+      "content_class": "cat",
+      "content_label": 3,
+      "style_class": "dog",
+      "style_label": 5,
+      "content_eval_idx": 96,
+      "style_eval_idx": 289
+    },
+    {
+      "filename": "cat_shape__dog_texture_022.png",
+      "content_class": "cat",
+      "content_label": 3,
+      "style_class": "dog",
+      "style_label": 5,
+      "content_eval_idx": 38,
+      "style_eval_idx": 315
+    },
+    {
+      "filename": "cat_shape__dog_texture_023.png",
+      "content_class": "cat",
+      "content_label": 3,
+      "style_class": "dog",
+      "style_label": 5,
+      "content_eval_idx": 384,
+      "style_eval_idx": 9
+    },
+    {
+      "filename": "cat_shape__dog_texture_024.png",
+      "content_class": "cat",
+      "content_label": 3,
+      "style_class": "dog",
+      "style_label": 5,
+      "content_eval_idx": 462,
+      "style_eval_idx": 362
+    },
+    {
+      "filename": "dog_shape__cat_texture_000.png",
+      "content_class": "dog",
+      "content_label": 5,
+      "style_class": "cat",
+      "style_label": 3,
+      "content_eval_idx": 296,
+      "style_eval_idx": 136
+    },
+    {
+      "filename": "dog_shape__cat_texture_001.png",
+      "content_class": "dog",
+      "content_label": 5,
+      "style_class": "cat",
+      "style_label": 3,
+      "content_eval_idx": 435,
+      "style_eval_idx": 493
+    },
+    {
+      "filename": "dog_shape__cat_texture_002.png",
+      "content_class": "dog",
+      "content_label": 5,
+      "style_class": "cat",
+      "style_label": 3,
+      "content_eval_idx": 113,
+      "style_eval_idx": 170
+    },
+    {
+      "filename": "dog_shape__cat_texture_003.png",
+      "content_class": "dog",
+      "content_label": 5,
+      "style_class": "cat",
+      "style_label": 3,
+      "content_eval_idx": 435,
+      "style_eval_idx": 102
+    },
+    {
+      "filename": "dog_shape__cat_texture_004.png",
+      "content_class": "dog",
+      "content_label": 5,
+      "style_class": "cat",
+      "style_label": 3,
+      "content_eval_idx": 439,
+      "style_eval_idx": 102
+    },
+    {
+      "filename": "dog_shape__cat_texture_005.png",
+      "content_class": "dog",
+      "content_label": 5,
+      "style_class": "cat",
+      "style_label": 3,
+      "content_eval_idx": 486,
+      "style_eval_idx": 102
+    },
+    {
+      "filename": "dog_shape__cat_texture_006.png",
+      "content_class": "dog",
+      "content_label": 5,
+      "style_class": "cat",
+      "style_label": 3,
+      "content_eval_idx": 435,
+      "style_eval_idx": 15
+    },
+    {
+      "filename": "dog_shape__cat_texture_007.png",
+      "content_class": "dog",
+      "content_label": 5,
+      "style_class": "cat",
+      "style_label": 3,
+      "content_eval_idx": 316,
+      "style_eval_idx": 407
+    },
+    {
+      "filename": "dog_shape__cat_texture_008.png",
+      "content_class": "dog",
+      "content_label": 5,
+      "style_class": "cat",
+      "style_label": 3,
+      "content_eval_idx": 62,
+      "style_eval_idx": 102
+    },
+    {
+      "filename": "dog_shape__cat_texture_009.png",
+      "content_class": "dog",
+      "content_label": 5,
+      "style_class": "cat",
+      "style_label": 3,
+      "content_eval_idx": 477,
+      "style_eval_idx": 147
+    },
+    {
+      "filename": "dog_shape__cat_texture_010.png",
+      "content_class": "dog",
+      "content_label": 5,
+      "style_class": "cat",
+      "style_label": 3,
+      "content_eval_idx": 186,
+      "style_eval_idx": 462
+    },
+    {
+      "filename": "dog_shape__cat_texture_011.png",
+      "content_class": "dog",
+      "content_label": 5,
+      "style_class": "cat",
+      "style_label": 3,
+      "content_eval_idx": 257,
+      "style_eval_idx": 407
+    },
+    {
+      "filename": "dog_shape__cat_texture_012.png",
+      "content_class": "dog",
+      "content_label": 5,
+      "style_class": "cat",
+      "style_label": 3,
+      "content_eval_idx": 362,
+      "style_eval_idx": 38
+    },
+    {
+      "filename": "dog_shape__cat_texture_013.png",
+      "content_class": "dog",
+      "content_label": 5,
+      "style_class": "cat",
+      "style_label": 3,
+      "content_eval_idx": 296,
+      "style_eval_idx": 119
+    },
+    {
+      "filename": "dog_shape__cat_texture_014.png",
+      "content_class": "dog",
+      "content_label": 5,
+      "style_class": "cat",
+      "style_label": 3,
+      "content_eval_idx": 439,
+      "style_eval_idx": 170
+    },
+    {
+      "filename": "dog_shape__cat_texture_015.png",
+      "content_class": "dog",
+      "content_label": 5,
+      "style_class": "cat",
+      "style_label": 3,
+      "content_eval_idx": 186,
+      "style_eval_idx": 267
+    },
+    {
+      "filename": "dog_shape__cat_texture_016.png",
+      "content_class": "dog",
+      "content_label": 5,
+      "style_class": "cat",
+      "style_label": 3,
+      "content_eval_idx": 450,
+      "style_eval_idx": 224
+    },
+    {
+      "filename": "dog_shape__cat_texture_017.png",
+      "content_class": "dog",
+      "content_label": 5,
+      "style_class": "cat",
+      "style_label": 3,
+      "content_eval_idx": 106,
+      "style_eval_idx": 389
+    },
+    {
+      "filename": "dog_shape__cat_texture_018.png",
+      "content_class": "dog",
+      "content_label": 5,
+      "style_class": "cat",
+      "style_label": 3,
+      "content_eval_idx": 35,
+      "style_eval_idx": 151
+    },
+    {
+      "filename": "dog_shape__cat_texture_019.png",
+      "content_class": "dog",
+      "content_label": 5,
+      "style_class": "cat",
+      "style_label": 3,
+      "content_eval_idx": 291,
+      "style_eval_idx": 33
+    },
+    {
+      "filename": "dog_shape__cat_texture_020.png",
+      "content_class": "dog",
+      "content_label": 5,
+      "style_class": "cat",
+      "style_label": 3,
+      "content_eval_idx": 486,
+      "style_eval_idx": 252
+    },
+    {
+      "filename": "dog_shape__cat_texture_021.png",
+      "content_class": "dog",
+      "content_label": 5,
+      "style_class": "cat",
+      "style_label": 3,
+      "content_eval_idx": 316,
+      "style_eval_idx": 409
+    },
+    {
+      "filename": "dog_shape__cat_texture_022.png",
+      "content_class": "dog",
+      "content_label": 5,
+      "style_class": "cat",
+      "style_label": 3,
+      "content_eval_idx": 464,
+      "style_eval_idx": 468
+    },
+    {
+      "filename": "dog_shape__cat_texture_023.png",
+      "content_class": "dog",
+      "content_label": 5,
+      "style_class": "cat",
+      "style_label": 3,
+      "content_eval_idx": 150,
+      "style_eval_idx": 251
+    },
+    {
+      "filename": "dog_shape__cat_texture_024.png",
+      "content_class": "dog",
+      "content_label": 5,
+      "style_class": "cat",
+      "style_label": 3,
+      "content_eval_idx": 348,
+      "style_eval_idx": 15
+    },
+    {
+      "filename": "deer_shape__horse_texture_000.png",
+      "content_class": "deer",
+      "content_label": 4,
+      "style_class": "horse",
+      "style_label": 6,
+      "content_eval_idx": 370,
+      "style_eval_idx": 221
+    },
+    {
+      "filename": "deer_shape__horse_texture_001.png",
+      "content_class": "deer",
+      "content_label": 4,
+      "style_class": "horse",
+      "style_label": 6,
+      "content_eval_idx": 76,
+      "style_eval_idx": 445
+    },
+    {
+      "filename": "deer_shape__horse_texture_002.png",
+      "content_class": "deer",
+      "content_label": 4,
+      "style_class": "horse",
+      "style_label": 6,
+      "content_eval_idx": 129,
+      "style_eval_idx": 497
+    },
+    {
+      "filename": "deer_shape__horse_texture_003.png",
+      "content_class": "deer",
+      "content_label": 4,
+      "style_class": "horse",
+      "style_label": 6,
+      "content_eval_idx": 460,
+      "style_eval_idx": 116
+    },
+    {
+      "filename": "deer_shape__horse_texture_004.png",
+      "content_class": "deer",
+      "content_label": 4,
+      "style_class": "horse",
+      "style_label": 6,
+      "content_eval_idx": 161,
+      "style_eval_idx": 345
+    },
+    {
+      "filename": "deer_shape__horse_texture_005.png",
+      "content_class": "deer",
+      "content_label": 4,
+      "style_class": "horse",
+      "style_label": 6,
+      "content_eval_idx": 353,
+      "style_eval_idx": 27
+    },
+    {
+      "filename": "deer_shape__horse_texture_006.png",
+      "content_class": "deer",
+      "content_label": 4,
+      "style_class": "horse",
+      "style_label": 6,
+      "content_eval_idx": 442,
+      "style_eval_idx": 41
+    },
+    {
+      "filename": "deer_shape__horse_texture_007.png",
+      "content_class": "deer",
+      "content_label": 4,
+      "style_class": "horse",
+      "style_label": 6,
+      "content_eval_idx": 161,
+      "style_eval_idx": 445
+    },
+    {
+      "filename": "deer_shape__horse_texture_008.png",
+      "content_class": "deer",
+      "content_label": 4,
+      "style_class": "horse",
+      "style_label": 6,
+      "content_eval_idx": 107,
+      "style_eval_idx": 297
+    },
+    {
+      "filename": "deer_shape__horse_texture_009.png",
+      "content_class": "deer",
+      "content_label": 4,
+      "style_class": "horse",
+      "style_label": 6,
+      "content_eval_idx": 469,
+      "style_eval_idx": 445
+    },
+    {
+      "filename": "deer_shape__horse_texture_010.png",
+      "content_class": "deer",
+      "content_label": 4,
+      "style_class": "horse",
+      "style_label": 6,
+      "content_eval_idx": 98,
+      "style_eval_idx": 41
+    },
+    {
+      "filename": "deer_shape__horse_texture_011.png",
+      "content_class": "deer",
+      "content_label": 4,
+      "style_class": "horse",
+      "style_label": 6,
+      "content_eval_idx": 21,
+      "style_eval_idx": 397
+    },
+    {
+      "filename": "deer_shape__horse_texture_012.png",
+      "content_class": "deer",
+      "content_label": 4,
+      "style_class": "horse",
+      "style_label": 6,
+      "content_eval_idx": 256,
+      "style_eval_idx": 223
+    },
+    {
+      "filename": "deer_shape__horse_texture_013.png",
+      "content_class": "deer",
+      "content_label": 4,
+      "style_class": "horse",
+      "style_label": 6,
+      "content_eval_idx": 126,
+      "style_eval_idx": 156
+    },
+    {
+      "filename": "deer_shape__horse_texture_014.png",
+      "content_class": "deer",
+      "content_label": 4,
+      "style_class": "horse",
+      "style_label": 6,
+      "content_eval_idx": 98,
+      "style_eval_idx": 112
+    },
+    {
+      "filename": "deer_shape__horse_texture_015.png",
+      "content_class": "deer",
+      "content_label": 4,
+      "style_class": "horse",
+      "style_label": 6,
+      "content_eval_idx": 404,
+      "style_eval_idx": 268
+    },
+    {
+      "filename": "deer_shape__horse_texture_016.png",
+      "content_class": "deer",
+      "content_label": 4,
+      "style_class": "horse",
+      "style_label": 6,
+      "content_eval_idx": 325,
+      "style_eval_idx": 445
+    },
+    {
+      "filename": "deer_shape__horse_texture_017.png",
+      "content_class": "deer",
+      "content_label": 4,
+      "style_class": "horse",
+      "style_label": 6,
+      "content_eval_idx": 183,
+      "style_eval_idx": 223
+    },
+    {
+      "filename": "deer_shape__horse_texture_018.png",
+      "content_class": "deer",
+      "content_label": 4,
+      "style_class": "horse",
+      "style_label": 6,
+      "content_eval_idx": 469,
+      "style_eval_idx": 391
+    },
+    {
+      "filename": "deer_shape__horse_texture_019.png",
+      "content_class": "deer",
+      "content_label": 4,
+      "style_class": "horse",
+      "style_label": 6,
+      "content_eval_idx": 161,
+      "style_eval_idx": 188
+    },
+    {
+      "filename": "deer_shape__horse_texture_020.png",
+      "content_class": "deer",
+      "content_label": 4,
+      "style_class": "horse",
+      "style_label": 6,
+      "content_eval_idx": 431,
+      "style_eval_idx": 153
+    },
+    {
+      "filename": "deer_shape__horse_texture_021.png",
+      "content_class": "deer",
+      "content_label": 4,
+      "style_class": "horse",
+      "style_label": 6,
+      "content_eval_idx": 235,
+      "style_eval_idx": 290
+    },
+    {
+      "filename": "deer_shape__horse_texture_022.png",
+      "content_class": "deer",
+      "content_label": 4,
+      "style_class": "horse",
+      "style_label": 6,
+      "content_eval_idx": 216,
+      "style_eval_idx": 155
+    },
+    {
+      "filename": "deer_shape__horse_texture_023.png",
+      "content_class": "deer",
+      "content_label": 4,
+      "style_class": "horse",
+      "style_label": 6,
+      "content_eval_idx": 343,
+      "style_eval_idx": 157
+    },
+    {
+      "filename": "deer_shape__horse_texture_024.png",
+      "content_class": "deer",
+      "content_label": 4,
+      "style_class": "horse",
+      "style_label": 6,
+      "content_eval_idx": 78,
+      "style_eval_idx": 178
+    },
+    {
+      "filename": "horse_shape__deer_texture_000.png",
+      "content_class": "horse",
+      "content_label": 6,
+      "style_class": "deer",
+      "style_label": 4,
+      "content_eval_idx": 264,
+      "style_eval_idx": 107
+    },
+    {
+      "filename": "horse_shape__deer_texture_001.png",
+      "content_class": "horse",
+      "content_label": 6,
+      "style_class": "deer",
+      "style_label": 4,
+      "content_eval_idx": 451,
+      "style_eval_idx": 174
+    },
+    {
+      "filename": "horse_shape__deer_texture_002.png",
+      "content_class": "horse",
+      "content_label": 6,
+      "style_class": "deer",
+      "style_label": 4,
+      "content_eval_idx": 405,
+      "style_eval_idx": 100
+    },
+    {
+      "filename": "horse_shape__deer_texture_003.png",
+      "content_class": "horse",
+      "content_label": 6,
+      "style_class": "deer",
+      "style_label": 4,
+      "content_eval_idx": 268,
+      "style_eval_idx": 482
+    },
+    {
+      "filename": "horse_shape__deer_texture_004.png",
+      "content_class": "horse",
+      "content_label": 6,
+      "style_class": "deer",
+      "style_label": 4,
+      "content_eval_idx": 284,
+      "style_eval_idx": 2
+    },
+    {
+      "filename": "horse_shape__deer_texture_005.png",
+      "content_class": "horse",
+      "content_label": 6,
+      "style_class": "deer",
+      "style_label": 4,
+      "content_eval_idx": 227,
+      "style_eval_idx": 105
+    },
+    {
+      "filename": "horse_shape__deer_texture_006.png",
+      "content_class": "horse",
+      "content_label": 6,
+      "style_class": "deer",
+      "style_label": 4,
+      "content_eval_idx": 473,
+      "style_eval_idx": 482
+    },
+    {
+      "filename": "horse_shape__deer_texture_007.png",
+      "content_class": "horse",
+      "content_label": 6,
+      "style_class": "deer",
+      "style_label": 4,
+      "content_eval_idx": 193,
+      "style_eval_idx": 105
+    },
+    {
+      "filename": "horse_shape__deer_texture_008.png",
+      "content_class": "horse",
+      "content_label": 6,
+      "style_class": "deer",
+      "style_label": 4,
+      "content_eval_idx": 178,
+      "style_eval_idx": 273
+    },
+    {
+      "filename": "horse_shape__deer_texture_009.png",
+      "content_class": "horse",
+      "content_label": 6,
+      "style_class": "deer",
+      "style_label": 4,
+      "content_eval_idx": 445,
+      "style_eval_idx": 63
+    },
+    {
+      "filename": "horse_shape__deer_texture_010.png",
+      "content_class": "horse",
+      "content_label": 6,
+      "style_class": "deer",
+      "style_label": 4,
+      "content_eval_idx": 51,
+      "style_eval_idx": 404
+    },
+    {
+      "filename": "horse_shape__deer_texture_011.png",
+      "content_class": "horse",
+      "content_label": 6,
+      "style_class": "deer",
+      "style_label": 4,
+      "content_eval_idx": 116,
+      "style_eval_idx": 273
+    },
+    {
+      "filename": "horse_shape__deer_texture_012.png",
+      "content_class": "horse",
+      "content_label": 6,
+      "style_class": "deer",
+      "style_label": 4,
+      "content_eval_idx": 414,
+      "style_eval_idx": 107
+    },
+    {
+      "filename": "horse_shape__deer_texture_013.png",
+      "content_class": "horse",
+      "content_label": 6,
+      "style_class": "deer",
+      "style_label": 4,
+      "content_eval_idx": 417,
+      "style_eval_idx": 262
+    },
+    {
+      "filename": "horse_shape__deer_texture_014.png",
+      "content_class": "horse",
+      "content_label": 6,
+      "style_class": "deer",
+      "style_label": 4,
+      "content_eval_idx": 41,
+      "style_eval_idx": 2
+    },
+    {
+      "filename": "horse_shape__deer_texture_015.png",
+      "content_class": "horse",
+      "content_label": 6,
+      "style_class": "deer",
+      "style_label": 4,
+      "content_eval_idx": 227,
+      "style_eval_idx": 126
+    },
+    {
+      "filename": "horse_shape__deer_texture_016.png",
+      "content_class": "horse",
+      "content_label": 6,
+      "style_class": "deer",
+      "style_label": 4,
+      "content_eval_idx": 374,
+      "style_eval_idx": 173
+    },
+    {
+      "filename": "horse_shape__deer_texture_017.png",
+      "content_class": "horse",
+      "content_label": 6,
+      "style_class": "deer",
+      "style_label": 4,
+      "content_eval_idx": 374,
+      "style_eval_idx": 181
+    },
+    {
+      "filename": "horse_shape__deer_texture_018.png",
+      "content_class": "horse",
+      "content_label": 6,
+      "style_class": "deer",
+      "style_label": 4,
+      "content_eval_idx": 68,
+      "style_eval_idx": 239
+    },
+    {
+      "filename": "horse_shape__deer_texture_019.png",
+      "content_class": "horse",
+      "content_label": 6,
+      "style_class": "deer",
+      "style_label": 4,
+      "content_eval_idx": 451,
+      "style_eval_idx": 273
+    },
+    {
+      "filename": "horse_shape__deer_texture_020.png",
+      "content_class": "horse",
+      "content_label": 6,
+      "style_class": "deer",
+      "style_label": 4,
+      "content_eval_idx": 227,
+      "style_eval_idx": 343
+    },
+    {
+      "filename": "horse_shape__deer_texture_021.png",
+      "content_class": "horse",
+      "content_label": 6,
+      "style_class": "deer",
+      "style_label": 4,
+      "content_eval_idx": 193,
+      "style_eval_idx": 201
+    },
+    {
+      "filename": "horse_shape__deer_texture_022.png",
+      "content_class": "horse",
+      "content_label": 6,
+      "style_class": "deer",
+      "style_label": 4,
+      "content_eval_idx": 41,
+      "style_eval_idx": 201
+    },
+    {
+      "filename": "horse_shape__deer_texture_023.png",
+      "content_class": "horse",
+      "content_label": 6,
+      "style_class": "deer",
+      "style_label": 4,
+      "content_eval_idx": 282,
+      "style_eval_idx": 105
+    },
+    {
+      "filename": "horse_shape__deer_texture_024.png",
+      "content_class": "horse",
+      "content_label": 6,
+      "style_class": "deer",
+      "style_label": 4,
+      "content_eval_idx": 405,
+      "style_eval_idx": 371
+    },
+    {
+      "filename": "airplane_shape__ship_texture_000.png",
+      "content_class": "airplane",
+      "content_label": 0,
+      "style_class": "ship",
+      "style_label": 8,
+      "content_eval_idx": 365,
+      "style_eval_idx": 123
+    },
+    {
+      "filename": "airplane_shape__ship_texture_001.png",
+      "content_class": "airplane",
+      "content_label": 0,
+      "style_class": "ship",
+      "style_label": 8,
+      "content_eval_idx": 45,
+      "style_eval_idx": 425
+    },
+    {
+      "filename": "airplane_shape__ship_texture_002.png",
+      "content_class": "airplane",
+      "content_label": 0,
+      "style_class": "ship",
+      "style_label": 8,
+      "content_eval_idx": 26,
+      "style_eval_idx": 17
+    },
+    {
+      "filename": "airplane_shape__ship_texture_003.png",
+      "content_class": "airplane",
+      "content_label": 0,
+      "style_class": "ship",
+      "style_label": 8,
+      "content_eval_idx": 205,
+      "style_eval_idx": 28
+    },
+    {
+      "filename": "airplane_shape__ship_texture_004.png",
+      "content_class": "airplane",
+      "content_label": 0,
+      "style_class": "ship",
+      "style_label": 8,
+      "content_eval_idx": 336,
+      "style_eval_idx": 16
+    },
+    {
+      "filename": "airplane_shape__ship_texture_005.png",
+      "content_class": "airplane",
+      "content_label": 0,
+      "style_class": "ship",
+      "style_label": 8,
+      "content_eval_idx": 205,
+      "style_eval_idx": 127
+    },
+    {
+      "filename": "airplane_shape__ship_texture_006.png",
+      "content_class": "airplane",
+      "content_label": 0,
+      "style_class": "ship",
+      "style_label": 8,
+      "content_eval_idx": 314,
+      "style_eval_idx": 127
+    },
+    {
+      "filename": "airplane_shape__ship_texture_007.png",
+      "content_class": "airplane",
+      "content_label": 0,
+      "style_class": "ship",
+      "style_label": 8,
+      "content_eval_idx": 349,
+      "style_eval_idx": 375
+    },
+    {
+      "filename": "airplane_shape__ship_texture_008.png",
+      "content_class": "airplane",
+      "content_label": 0,
+      "style_class": "ship",
+      "style_label": 8,
+      "content_eval_idx": 420,
+      "style_eval_idx": 28
+    },
+    {
+      "filename": "airplane_shape__ship_texture_009.png",
+      "content_class": "airplane",
+      "content_label": 0,
+      "style_class": "ship",
+      "style_label": 8,
+      "content_eval_idx": 25,
+      "style_eval_idx": 286
+    },
+    {
+      "filename": "airplane_shape__ship_texture_010.png",
+      "content_class": "airplane",
+      "content_label": 0,
+      "style_class": "ship",
+      "style_label": 8,
+      "content_eval_idx": 314,
+      "style_eval_idx": 16
+    },
+    {
+      "filename": "airplane_shape__ship_texture_011.png",
+      "content_class": "airplane",
+      "content_label": 0,
+      "style_class": "ship",
+      "style_label": 8,
+      "content_eval_idx": 135,
+      "style_eval_idx": 244
+    },
+    {
+      "filename": "airplane_shape__ship_texture_012.png",
+      "content_class": "airplane",
+      "content_label": 0,
+      "style_class": "ship",
+      "style_label": 8,
+      "content_eval_idx": 416,
+      "style_eval_idx": 360
+    },
+    {
+      "filename": "airplane_shape__ship_texture_013.png",
+      "content_class": "airplane",
+      "content_label": 0,
+      "style_class": "ship",
+      "style_label": 8,
+      "content_eval_idx": 392,
+      "style_eval_idx": 162
+    },
+    {
+      "filename": "airplane_shape__ship_texture_014.png",
+      "content_class": "airplane",
+      "content_label": 0,
+      "style_class": "ship",
+      "style_label": 8,
+      "content_eval_idx": 19,
+      "style_eval_idx": 274
+    },
+    {
+      "filename": "airplane_shape__ship_texture_015.png",
+      "content_class": "airplane",
+      "content_label": 0,
+      "style_class": "ship",
+      "style_label": 8,
+      "content_eval_idx": 457,
+      "style_eval_idx": 386
+    },
+    {
+      "filename": "airplane_shape__ship_texture_016.png",
+      "content_class": "airplane",
+      "content_label": 0,
+      "style_class": "ship",
+      "style_label": 8,
+      "content_eval_idx": 344,
+      "style_eval_idx": 355
+    },
+    {
+      "filename": "airplane_shape__ship_texture_017.png",
+      "content_class": "airplane",
+      "content_label": 0,
+      "style_class": "ship",
+      "style_label": 8,
+      "content_eval_idx": 446,
+      "style_eval_idx": 419
+    },
+    {
+      "filename": "airplane_shape__ship_texture_018.png",
+      "content_class": "airplane",
+      "content_label": 0,
+      "style_class": "ship",
+      "style_label": 8,
+      "content_eval_idx": 336,
+      "style_eval_idx": 355
+    },
+    {
+      "filename": "airplane_shape__ship_texture_019.png",
+      "content_class": "airplane",
+      "content_label": 0,
+      "style_class": "ship",
+      "style_label": 8,
+      "content_eval_idx": 416,
+      "style_eval_idx": 140
+    },
+    {
+      "filename": "airplane_shape__ship_texture_020.png",
+      "content_class": "airplane",
+      "content_label": 0,
+      "style_class": "ship",
+      "style_label": 8,
+      "content_eval_idx": 47,
+      "style_eval_idx": 101
+    },
+    {
+      "filename": "airplane_shape__ship_texture_021.png",
+      "content_class": "airplane",
+      "content_label": 0,
+      "style_class": "ship",
+      "style_label": 8,
+      "content_eval_idx": 420,
+      "style_eval_idx": 372
+    },
+    {
+      "filename": "airplane_shape__ship_texture_022.png",
+      "content_class": "airplane",
+      "content_label": 0,
+      "style_class": "ship",
+      "style_label": 8,
+      "content_eval_idx": 465,
+      "style_eval_idx": 234
+    },
+    {
+      "filename": "airplane_shape__ship_texture_023.png",
+      "content_class": "airplane",
+      "content_label": 0,
+      "style_class": "ship",
+      "style_label": 8,
+      "content_eval_idx": 314,
+      "style_eval_idx": 244
+    },
+    {
+      "filename": "airplane_shape__ship_texture_024.png",
+      "content_class": "airplane",
+      "content_label": 0,
+      "style_class": "ship",
+      "style_label": 8,
+      "content_eval_idx": 249,
+      "style_eval_idx": 369
+    },
+    {
+      "filename": "ship_shape__airplane_texture_000.png",
+      "content_class": "ship",
+      "content_label": 8,
+      "style_class": "airplane",
+      "style_label": 0,
+      "content_eval_idx": 355,
+      "style_eval_idx": 492
+    },
+    {
+      "filename": "ship_shape__airplane_texture_001.png",
+      "content_class": "ship",
+      "content_label": 8,
+      "style_class": "airplane",
+      "style_label": 0,
+      "content_eval_idx": 499,
+      "style_eval_idx": 205
+    },
+    {
+      "filename": "ship_shape__airplane_texture_002.png",
+      "content_class": "ship",
+      "content_label": 8,
+      "style_class": "airplane",
+      "style_label": 0,
+      "content_eval_idx": 494,
+      "style_eval_idx": 97
+    },
+    {
+      "filename": "ship_shape__airplane_texture_003.png",
+      "content_class": "ship",
+      "content_label": 8,
+      "style_class": "airplane",
+      "style_label": 0,
+      "content_eval_idx": 228,
+      "style_eval_idx": 242
+    },
+    {
+      "filename": "ship_shape__airplane_texture_004.png",
+      "content_class": "ship",
+      "content_label": 8,
+      "style_class": "airplane",
+      "style_label": 0,
+      "content_eval_idx": 17,
+      "style_eval_idx": 298
+    },
+    {
+      "filename": "ship_shape__airplane_texture_005.png",
+      "content_class": "ship",
+      "content_label": 8,
+      "style_class": "airplane",
+      "style_label": 0,
+      "content_eval_idx": 499,
+      "style_eval_idx": 120
+    },
+    {
+      "filename": "ship_shape__airplane_texture_006.png",
+      "content_class": "ship",
+      "content_label": 8,
+      "style_class": "airplane",
+      "style_label": 0,
+      "content_eval_idx": 40,
+      "style_eval_idx": 211
+    },
+    {
+      "filename": "ship_shape__airplane_texture_007.png",
+      "content_class": "ship",
+      "content_label": 8,
+      "style_class": "airplane",
+      "style_label": 0,
+      "content_eval_idx": 73,
+      "style_eval_idx": 177
+    },
+    {
+      "filename": "ship_shape__airplane_texture_008.png",
+      "content_class": "ship",
+      "content_label": 8,
+      "style_class": "airplane",
+      "style_label": 0,
+      "content_eval_idx": 427,
+      "style_eval_idx": 47
+    },
+    {
+      "filename": "ship_shape__airplane_texture_009.png",
+      "content_class": "ship",
+      "content_label": 8,
+      "style_class": "airplane",
+      "style_label": 0,
+      "content_eval_idx": 73,
+      "style_eval_idx": 444
+    },
+    {
+      "filename": "ship_shape__airplane_texture_010.png",
+      "content_class": "ship",
+      "content_label": 8,
+      "style_class": "airplane",
+      "style_label": 0,
+      "content_eval_idx": 40,
+      "style_eval_idx": 420
+    },
+    {
+      "filename": "ship_shape__airplane_texture_011.png",
+      "content_class": "ship",
+      "content_label": 8,
+      "style_class": "airplane",
+      "style_label": 0,
+      "content_eval_idx": 228,
+      "style_eval_idx": 270
+    },
+    {
+      "filename": "ship_shape__airplane_texture_012.png",
+      "content_class": "ship",
+      "content_label": 8,
+      "style_class": "airplane",
+      "style_label": 0,
+      "content_eval_idx": 326,
+      "style_eval_idx": 314
+    },
+    {
+      "filename": "ship_shape__airplane_texture_013.png",
+      "content_class": "ship",
+      "content_label": 8,
+      "style_class": "airplane",
+      "style_label": 0,
+      "content_eval_idx": 123,
+      "style_eval_idx": 492
+    },
+    {
+      "filename": "ship_shape__airplane_texture_014.png",
+      "content_class": "ship",
+      "content_label": 8,
+      "style_class": "airplane",
+      "style_label": 0,
+      "content_eval_idx": 321,
+      "style_eval_idx": 135
+    },
+    {
+      "filename": "ship_shape__airplane_texture_015.png",
+      "content_class": "ship",
+      "content_label": 8,
+      "style_class": "airplane",
+      "style_label": 0,
+      "content_eval_idx": 123,
+      "style_eval_idx": 200
+    },
+    {
+      "filename": "ship_shape__airplane_texture_016.png",
+      "content_class": "ship",
+      "content_label": 8,
+      "style_class": "airplane",
+      "style_label": 0,
+      "content_eval_idx": 380,
+      "style_eval_idx": 303
+    },
+    {
+      "filename": "ship_shape__airplane_texture_017.png",
+      "content_class": "ship",
+      "content_label": 8,
+      "style_class": "airplane",
+      "style_label": 0,
+      "content_eval_idx": 292,
+      "style_eval_idx": 313
+    },
+    {
+      "filename": "ship_shape__airplane_texture_018.png",
+      "content_class": "ship",
+      "content_label": 8,
+      "style_class": "airplane",
+      "style_label": 0,
+      "content_eval_idx": 214,
+      "style_eval_idx": 446
+    },
+    {
+      "filename": "ship_shape__airplane_texture_019.png",
+      "content_class": "ship",
+      "content_label": 8,
+      "style_class": "airplane",
+      "style_label": 0,
+      "content_eval_idx": 61,
+      "style_eval_idx": 457
+    },
+    {
+      "filename": "ship_shape__airplane_texture_020.png",
+      "content_class": "ship",
+      "content_label": 8,
+      "style_class": "airplane",
+      "style_label": 0,
+      "content_eval_idx": 73,
+      "style_eval_idx": 238
+    },
+    {
+      "filename": "ship_shape__airplane_texture_021.png",
+      "content_class": "ship",
+      "content_label": 8,
+      "style_class": "airplane",
+      "style_label": 0,
+      "content_eval_idx": 162,
+      "style_eval_idx": 446
+    },
+    {
+      "filename": "ship_shape__airplane_texture_022.png",
+      "content_class": "ship",
+      "content_label": 8,
+      "style_class": "airplane",
+      "style_label": 0,
+      "content_eval_idx": 372,
+      "style_eval_idx": 416
+    },
+    {
+      "filename": "ship_shape__airplane_texture_023.png",
+      "content_class": "ship",
+      "content_label": 8,
+      "style_class": "airplane",
+      "style_label": 0,
+      "content_eval_idx": 162,
+      "style_eval_idx": 449
+    },
+    {
+      "filename": "ship_shape__airplane_texture_024.png",
+      "content_class": "ship",
+      "content_label": 8,
+      "style_class": "airplane",
+      "style_label": 0,
+      "content_eval_idx": 292,
+      "style_eval_idx": 47
+    },
+    {
+      "filename": "car_shape__truck_texture_000.png",
+      "content_class": "car",
+      "content_label": 2,
+      "style_class": "truck",
+      "style_label": 9,
+      "content_eval_idx": 131,
+      "style_eval_idx": 237
+    },
+    {
+      "filename": "car_shape__truck_texture_001.png",
+      "content_class": "car",
+      "content_label": 2,
+      "style_class": "truck",
+      "style_label": 9,
+      "content_eval_idx": 74,
+      "style_eval_idx": 46
+    },
+    {
+      "filename": "car_shape__truck_texture_002.png",
+      "content_class": "car",
+      "content_label": 2,
+      "style_class": "truck",
+      "style_label": 9,
+      "content_eval_idx": 332,
+      "style_eval_idx": 310
+    },
+    {
+      "filename": "car_shape__truck_texture_003.png",
+      "content_class": "car",
+      "content_label": 2,
+      "style_class": "truck",
+      "style_label": 9,
+      "content_eval_idx": 299,
+      "style_eval_idx": 309
+    },
+    {
+      "filename": "car_shape__truck_texture_004.png",
+      "content_class": "car",
+      "content_label": 2,
+      "style_class": "truck",
+      "style_label": 9,
+      "content_eval_idx": 377,
+      "style_eval_idx": 24
+    },
+    {
+      "filename": "car_shape__truck_texture_005.png",
+      "content_class": "car",
+      "content_label": 2,
+      "style_class": "truck",
+      "style_label": 9,
+      "content_eval_idx": 43,
+      "style_eval_idx": 280
+    },
+    {
+      "filename": "car_shape__truck_texture_006.png",
+      "content_class": "car",
+      "content_label": 2,
+      "style_class": "truck",
+      "style_label": 9,
+      "content_eval_idx": 159,
+      "style_eval_idx": 280
+    },
+    {
+      "filename": "car_shape__truck_texture_007.png",
+      "content_class": "car",
+      "content_label": 2,
+      "style_class": "truck",
+      "style_label": 9,
+      "content_eval_idx": 175,
+      "style_eval_idx": 81
+    },
+    {
+      "filename": "car_shape__truck_texture_008.png",
+      "content_class": "car",
+      "content_label": 2,
+      "style_class": "truck",
+      "style_label": 9,
+      "content_eval_idx": 222,
+      "style_eval_idx": 163
+    },
+    {
+      "filename": "car_shape__truck_texture_009.png",
+      "content_class": "car",
+      "content_label": 2,
+      "style_class": "truck",
+      "style_label": 9,
+      "content_eval_idx": 176,
+      "style_eval_idx": 295
+    },
+    {
+      "filename": "car_shape__truck_texture_010.png",
+      "content_class": "car",
+      "content_label": 2,
+      "style_class": "truck",
+      "style_label": 9,
+      "content_eval_idx": 258,
+      "style_eval_idx": 166
+    },
+    {
+      "filename": "car_shape__truck_texture_011.png",
+      "content_class": "car",
+      "content_label": 2,
+      "style_class": "truck",
+      "style_label": 9,
+      "content_eval_idx": 481,
+      "style_eval_idx": 53
+    },
+    {
+      "filename": "car_shape__truck_texture_012.png",
+      "content_class": "car",
+      "content_label": 2,
+      "style_class": "truck",
+      "style_label": 9,
+      "content_eval_idx": 22,
+      "style_eval_idx": 261
+    },
+    {
+      "filename": "car_shape__truck_texture_013.png",
+      "content_class": "car",
+      "content_label": 2,
+      "style_class": "truck",
+      "style_label": 9,
+      "content_eval_idx": 43,
+      "style_eval_idx": 46
+    },
+    {
+      "filename": "car_shape__truck_texture_014.png",
+      "content_class": "car",
+      "content_label": 2,
+      "style_class": "truck",
+      "style_label": 9,
+      "content_eval_idx": 67,
+      "style_eval_idx": 309
+    },
+    {
+      "filename": "car_shape__truck_texture_015.png",
+      "content_class": "car",
+      "content_label": 2,
+      "style_class": "truck",
+      "style_label": 9,
+      "content_eval_idx": 490,
+      "style_eval_idx": 237
+    },
+    {
+      "filename": "car_shape__truck_texture_016.png",
+      "content_class": "car",
+      "content_label": 2,
+      "style_class": "truck",
+      "style_label": 9,
+      "content_eval_idx": 111,
+      "style_eval_idx": 248
+    },
+    {
+      "filename": "car_shape__truck_texture_017.png",
+      "content_class": "car",
+      "content_label": 2,
+      "style_class": "truck",
+      "style_label": 9,
+      "content_eval_idx": 111,
+      "style_eval_idx": 58
+    },
+    {
+      "filename": "car_shape__truck_texture_018.png",
+      "content_class": "car",
+      "content_label": 2,
+      "style_class": "truck",
+      "style_label": 9,
+      "content_eval_idx": 57,
+      "style_eval_idx": 496
+    },
+    {
+      "filename": "car_shape__truck_texture_019.png",
+      "content_class": "car",
+      "content_label": 2,
+      "style_class": "truck",
+      "style_label": 9,
+      "content_eval_idx": 141,
+      "style_eval_idx": 259
+    },
+    {
+      "filename": "car_shape__truck_texture_020.png",
+      "content_class": "car",
+      "content_label": 2,
+      "style_class": "truck",
+      "style_label": 9,
+      "content_eval_idx": 109,
+      "style_eval_idx": 496
+    },
+    {
+      "filename": "car_shape__truck_texture_021.png",
+      "content_class": "car",
+      "content_label": 2,
+      "style_class": "truck",
+      "style_label": 9,
+      "content_eval_idx": 324,
+      "style_eval_idx": 310
+    },
+    {
+      "filename": "car_shape__truck_texture_022.png",
+      "content_class": "car",
+      "content_label": 2,
+      "style_class": "truck",
+      "style_label": 9,
+      "content_eval_idx": 418,
+      "style_eval_idx": 225
+    },
+    {
+      "filename": "car_shape__truck_texture_023.png",
+      "content_class": "car",
+      "content_label": 2,
+      "style_class": "truck",
+      "style_label": 9,
+      "content_eval_idx": 300,
+      "style_eval_idx": 165
+    },
+    {
+      "filename": "car_shape__truck_texture_024.png",
+      "content_class": "car",
+      "content_label": 2,
+      "style_class": "truck",
+      "style_label": 9,
+      "content_eval_idx": 379,
+      "style_eval_idx": 447
+    },
+    {
+      "filename": "truck_shape__car_texture_000.png",
+      "content_class": "truck",
+      "content_label": 9,
+      "style_class": "car",
+      "style_label": 2,
+      "content_eval_idx": 184,
+      "style_eval_idx": 74
+    },
+    {
+      "filename": "truck_shape__car_texture_001.png",
+      "content_class": "truck",
+      "content_label": 9,
+      "style_class": "car",
+      "style_label": 2,
+      "content_eval_idx": 187,
+      "style_eval_idx": 332
+    },
+    {
+      "filename": "truck_shape__car_texture_002.png",
+      "content_class": "truck",
+      "content_label": 9,
+      "style_class": "car",
+      "style_label": 2,
+      "content_eval_idx": 146,
+      "style_eval_idx": 490
+    },
+    {
+      "filename": "truck_shape__car_texture_003.png",
+      "content_class": "truck",
+      "content_label": 9,
+      "style_class": "car",
+      "style_label": 2,
+      "content_eval_idx": 184,
+      "style_eval_idx": 141
+    },
+    {
+      "filename": "truck_shape__car_texture_004.png",
+      "content_class": "truck",
+      "content_label": 9,
+      "style_class": "car",
+      "style_label": 2,
+      "content_eval_idx": 480,
+      "style_eval_idx": 340
+    },
+    {
+      "filename": "truck_shape__car_texture_005.png",
+      "content_class": "truck",
+      "content_label": 9,
+      "style_class": "car",
+      "style_label": 2,
+      "content_eval_idx": 58,
+      "style_eval_idx": 138
+    },
+    {
+      "filename": "truck_shape__car_texture_006.png",
+      "content_class": "truck",
+      "content_label": 9,
+      "style_class": "car",
+      "style_label": 2,
+      "content_eval_idx": 53,
+      "style_eval_idx": 254
+    },
+    {
+      "filename": "truck_shape__car_texture_007.png",
+      "content_class": "truck",
+      "content_label": 9,
+      "style_class": "car",
+      "style_label": 2,
+      "content_eval_idx": 184,
+      "style_eval_idx": 176
+    },
+    {
+      "filename": "truck_shape__car_texture_008.png",
+      "content_class": "truck",
+      "content_label": 9,
+      "style_class": "car",
+      "style_label": 2,
+      "content_eval_idx": 237,
+      "style_eval_idx": 20
+    },
+    {
+      "filename": "truck_shape__car_texture_009.png",
+      "content_class": "truck",
+      "content_label": 9,
+      "style_class": "car",
+      "style_label": 2,
+      "content_eval_idx": 166,
+      "style_eval_idx": 364
+    },
+    {
+      "filename": "truck_shape__car_texture_010.png",
+      "content_class": "truck",
+      "content_label": 9,
+      "style_class": "car",
+      "style_label": 2,
+      "content_eval_idx": 130,
+      "style_eval_idx": 222
+    },
+    {
+      "filename": "truck_shape__car_texture_011.png",
+      "content_class": "truck",
+      "content_label": 9,
+      "style_class": "car",
+      "style_label": 2,
+      "content_eval_idx": 243,
+      "style_eval_idx": 67
+    },
+    {
+      "filename": "truck_shape__car_texture_012.png",
+      "content_class": "truck",
+      "content_label": 9,
+      "style_class": "car",
+      "style_label": 2,
+      "content_eval_idx": 208,
+      "style_eval_idx": 265
+    },
+    {
+      "filename": "truck_shape__car_texture_013.png",
+      "content_class": "truck",
+      "content_label": 9,
+      "style_class": "car",
+      "style_label": 2,
+      "content_eval_idx": 237,
+      "style_eval_idx": 413
+    },
+    {
+      "filename": "truck_shape__car_texture_014.png",
+      "content_class": "truck",
+      "content_label": 9,
+      "style_class": "car",
+      "style_label": 2,
+      "content_eval_idx": 14,
+      "style_eval_idx": 176
+    },
+    {
+      "filename": "truck_shape__car_texture_015.png",
+      "content_class": "truck",
+      "content_label": 9,
+      "style_class": "car",
+      "style_label": 2,
+      "content_eval_idx": 398,
+      "style_eval_idx": 364
+    },
+    {
+      "filename": "truck_shape__car_texture_016.png",
+      "content_class": "truck",
+      "content_label": 9,
+      "style_class": "car",
+      "style_label": 2,
+      "content_eval_idx": 53,
+      "style_eval_idx": 167
+    },
+    {
+      "filename": "truck_shape__car_texture_017.png",
+      "content_class": "truck",
+      "content_label": 9,
+      "style_class": "car",
+      "style_label": 2,
+      "content_eval_idx": 187,
+      "style_eval_idx": 241
+    },
+    {
+      "filename": "truck_shape__car_texture_018.png",
+      "content_class": "truck",
+      "content_label": 9,
+      "style_class": "car",
+      "style_label": 2,
+      "content_eval_idx": 237,
+      "style_eval_idx": 402
+    },
+    {
+      "filename": "truck_shape__car_texture_019.png",
+      "content_class": "truck",
+      "content_label": 9,
+      "style_class": "car",
+      "style_label": 2,
+      "content_eval_idx": 401,
+      "style_eval_idx": 138
+    },
+    {
+      "filename": "truck_shape__car_texture_020.png",
+      "content_class": "truck",
+      "content_label": 9,
+      "style_class": "car",
+      "style_label": 2,
+      "content_eval_idx": 456,
+      "style_eval_idx": 7
+    },
+    {
+      "filename": "truck_shape__car_texture_021.png",
+      "content_class": "truck",
+      "content_label": 9,
+      "style_class": "car",
+      "style_label": 2,
+      "content_eval_idx": 476,
+      "style_eval_idx": 148
+    },
+    {
+      "filename": "truck_shape__car_texture_022.png",
+      "content_class": "truck",
+      "content_label": 9,
+      "style_class": "car",
+      "style_label": 2,
+      "content_eval_idx": 46,
+      "style_eval_idx": 385
+    },
+    {
+      "filename": "truck_shape__car_texture_023.png",
+      "content_class": "truck",
+      "content_label": 9,
+      "style_class": "car",
+      "style_label": 2,
+      "content_eval_idx": 310,
+      "style_eval_idx": 67
+    },
+    {
+      "filename": "truck_shape__car_texture_024.png",
+      "content_class": "truck",
+      "content_label": 9,
+      "style_class": "car",
+      "style_label": 2,
+      "content_eval_idx": 208,
+      "style_eval_idx": 148
+    },
+    {
+      "filename": "bird_shape__monkey_texture_000.png",
+      "content_class": "bird",
+      "content_label": 1,
+      "style_class": "monkey",
+      "style_label": 7,
+      "content_eval_idx": 390,
+      "style_eval_idx": 383
+    },
+    {
+      "filename": "bird_shape__monkey_texture_001.png",
+      "content_class": "bird",
+      "content_label": 1,
+      "style_class": "monkey",
+      "style_label": 7,
+      "content_eval_idx": 213,
+      "style_eval_idx": 32
+    },
+    {
+      "filename": "bird_shape__monkey_texture_002.png",
+      "content_class": "bird",
+      "content_label": 1,
+      "style_class": "monkey",
+      "style_label": 7,
+      "content_eval_idx": 36,
+      "style_eval_idx": 412
+    },
+    {
+      "filename": "bird_shape__monkey_texture_003.png",
+      "content_class": "bird",
+      "content_label": 1,
+      "style_class": "monkey",
+      "style_label": 7,
+      "content_eval_idx": 390,
+      "style_eval_idx": 179
+    },
+    {
+      "filename": "bird_shape__monkey_texture_004.png",
+      "content_class": "bird",
+      "content_label": 1,
+      "style_class": "monkey",
+      "style_label": 7,
+      "content_eval_idx": 204,
+      "style_eval_idx": 387
+    },
+    {
+      "filename": "bird_shape__monkey_texture_005.png",
+      "content_class": "bird",
+      "content_label": 1,
+      "style_class": "monkey",
+      "style_label": 7,
+      "content_eval_idx": 312,
+      "style_eval_idx": 189
+    },
+    {
+      "filename": "bird_shape__monkey_texture_006.png",
+      "content_class": "bird",
+      "content_label": 1,
+      "style_class": "monkey",
+      "style_label": 7,
+      "content_eval_idx": 60,
+      "style_eval_idx": 358
+    },
+    {
+      "filename": "bird_shape__monkey_texture_007.png",
+      "content_class": "bird",
+      "content_label": 1,
+      "style_class": "monkey",
+      "style_label": 7,
+      "content_eval_idx": 5,
+      "style_eval_idx": 294
+    },
+    {
+      "filename": "bird_shape__monkey_texture_008.png",
+      "content_class": "bird",
+      "content_label": 1,
+      "style_class": "monkey",
+      "style_label": 7,
+      "content_eval_idx": 77,
+      "style_eval_idx": 478
+    },
+    {
+      "filename": "bird_shape__monkey_texture_009.png",
+      "content_class": "bird",
+      "content_label": 1,
+      "style_class": "monkey",
+      "style_label": 7,
+      "content_eval_idx": 312,
+      "style_eval_idx": 189
+    },
+    {
+      "filename": "bird_shape__monkey_texture_010.png",
+      "content_class": "bird",
+      "content_label": 1,
+      "style_class": "monkey",
+      "style_label": 7,
+      "content_eval_idx": 218,
+      "style_eval_idx": 168
+    },
+    {
+      "filename": "bird_shape__monkey_texture_011.png",
+      "content_class": "bird",
+      "content_label": 1,
+      "style_class": "monkey",
+      "style_label": 7,
+      "content_eval_idx": 351,
+      "style_eval_idx": 294
+    },
+    {
+      "filename": "bird_shape__monkey_texture_012.png",
+      "content_class": "bird",
+      "content_label": 1,
+      "style_class": "monkey",
+      "style_label": 7,
+      "content_eval_idx": 192,
+      "style_eval_idx": 378
+    },
+    {
+      "filename": "bird_shape__monkey_texture_013.png",
+      "content_class": "bird",
+      "content_label": 1,
+      "style_class": "monkey",
+      "style_label": 7,
+      "content_eval_idx": 65,
+      "style_eval_idx": 383
+    },
+    {
+      "filename": "bird_shape__monkey_texture_014.png",
+      "content_class": "bird",
+      "content_label": 1,
+      "style_class": "monkey",
+      "style_label": 7,
+      "content_eval_idx": 361,
+      "style_eval_idx": 80
+    },
+    {
+      "filename": "bird_shape__monkey_texture_015.png",
+      "content_class": "bird",
+      "content_label": 1,
+      "style_class": "monkey",
+      "style_label": 7,
+      "content_eval_idx": 89,
+      "style_eval_idx": 217
+    },
+    {
+      "filename": "bird_shape__monkey_texture_016.png",
+      "content_class": "bird",
+      "content_label": 1,
+      "style_class": "monkey",
+      "style_label": 7,
+      "content_eval_idx": 199,
+      "style_eval_idx": 79
+    },
+    {
+      "filename": "bird_shape__monkey_texture_017.png",
+      "content_class": "bird",
+      "content_label": 1,
+      "style_class": "monkey",
+      "style_label": 7,
+      "content_eval_idx": 77,
+      "style_eval_idx": 219
+    },
+    {
+      "filename": "bird_shape__monkey_texture_018.png",
+      "content_class": "bird",
+      "content_label": 1,
+      "style_class": "monkey",
+      "style_label": 7,
+      "content_eval_idx": 312,
+      "style_eval_idx": 206
+    },
+    {
+      "filename": "bird_shape__monkey_texture_019.png",
+      "content_class": "bird",
+      "content_label": 1,
+      "style_class": "monkey",
+      "style_label": 7,
+      "content_eval_idx": 278,
+      "style_eval_idx": 3
+    },
+    {
+      "filename": "bird_shape__monkey_texture_020.png",
+      "content_class": "bird",
+      "content_label": 1,
+      "style_class": "monkey",
+      "style_label": 7,
+      "content_eval_idx": 330,
+      "style_eval_idx": 54
+    },
+    {
+      "filename": "bird_shape__monkey_texture_021.png",
+      "content_class": "bird",
+      "content_label": 1,
+      "style_class": "monkey",
+      "style_label": 7,
+      "content_eval_idx": 190,
+      "style_eval_idx": 171
+    },
+    {
+      "filename": "bird_shape__monkey_texture_022.png",
+      "content_class": "bird",
+      "content_label": 1,
+      "style_class": "monkey",
+      "style_label": 7,
+      "content_eval_idx": 441,
+      "style_eval_idx": 478
+    },
+    {
+      "filename": "bird_shape__monkey_texture_023.png",
+      "content_class": "bird",
+      "content_label": 1,
+      "style_class": "monkey",
+      "style_label": 7,
+      "content_eval_idx": 5,
+      "style_eval_idx": 358
+    },
+    {
+      "filename": "bird_shape__monkey_texture_024.png",
+      "content_class": "bird",
+      "content_label": 1,
+      "style_class": "monkey",
+      "style_label": 7,
+      "content_eval_idx": 204,
+      "style_eval_idx": 426
+    },
+    {
+      "filename": "monkey_shape__bird_texture_000.png",
+      "content_class": "monkey",
+      "content_label": 7,
+      "style_class": "bird",
+      "style_label": 1,
+      "content_eval_idx": 378,
+      "style_eval_idx": 215
+    },
+    {
+      "filename": "monkey_shape__bird_texture_001.png",
+      "content_class": "monkey",
+      "content_label": 7,
+      "style_class": "bird",
+      "style_label": 1,
+      "content_eval_idx": 179,
+      "style_eval_idx": 69
+    },
+    {
+      "filename": "monkey_shape__bird_texture_002.png",
+      "content_class": "monkey",
+      "content_label": 7,
+      "style_class": "bird",
+      "style_label": 1,
+      "content_eval_idx": 70,
+      "style_eval_idx": 367
+    },
+    {
+      "filename": "monkey_shape__bird_texture_003.png",
+      "content_class": "monkey",
+      "content_label": 7,
+      "style_class": "bird",
+      "style_label": 1,
+      "content_eval_idx": 171,
+      "style_eval_idx": 69
+    },
+    {
+      "filename": "monkey_shape__bird_texture_004.png",
+      "content_class": "monkey",
+      "content_label": 7,
+      "style_class": "bird",
+      "style_label": 1,
+      "content_eval_idx": 197,
+      "style_eval_idx": 93
+    },
+    {
+      "filename": "monkey_shape__bird_texture_005.png",
+      "content_class": "monkey",
+      "content_label": 7,
+      "style_class": "bird",
+      "style_label": 1,
+      "content_eval_idx": 3,
+      "style_eval_idx": 65
+    },
+    {
+      "filename": "monkey_shape__bird_texture_006.png",
+      "content_class": "monkey",
+      "content_label": 7,
+      "style_class": "bird",
+      "style_label": 1,
+      "content_eval_idx": 378,
+      "style_eval_idx": 452
+    },
+    {
+      "filename": "monkey_shape__bird_texture_007.png",
+      "content_class": "monkey",
+      "content_label": 7,
+      "style_class": "bird",
+      "style_label": 1,
+      "content_eval_idx": 266,
+      "style_eval_idx": 65
+    },
+    {
+      "filename": "monkey_shape__bird_texture_008.png",
+      "content_class": "monkey",
+      "content_label": 7,
+      "style_class": "bird",
+      "style_label": 1,
+      "content_eval_idx": 424,
+      "style_eval_idx": 84
+    },
+    {
+      "filename": "monkey_shape__bird_texture_009.png",
+      "content_class": "monkey",
+      "content_label": 7,
+      "style_class": "bird",
+      "style_label": 1,
+      "content_eval_idx": 94,
+      "style_eval_idx": 278
+    },
+    {
+      "filename": "monkey_shape__bird_texture_010.png",
+      "content_class": "monkey",
+      "content_label": 7,
+      "style_class": "bird",
+      "style_label": 1,
+      "content_eval_idx": 426,
+      "style_eval_idx": 351
+    },
+    {
+      "filename": "monkey_shape__bird_texture_011.png",
+      "content_class": "monkey",
+      "content_label": 7,
+      "style_class": "bird",
+      "style_label": 1,
+      "content_eval_idx": 378,
+      "style_eval_idx": 84
+    },
+    {
+      "filename": "monkey_shape__bird_texture_012.png",
+      "content_class": "monkey",
+      "content_label": 7,
+      "style_class": "bird",
+      "style_label": 1,
+      "content_eval_idx": 472,
+      "style_eval_idx": 304
+    },
+    {
+      "filename": "monkey_shape__bird_texture_013.png",
+      "content_class": "monkey",
+      "content_label": 7,
+      "style_class": "bird",
+      "style_label": 1,
+      "content_eval_idx": 466,
+      "style_eval_idx": 429
+    },
+    {
+      "filename": "monkey_shape__bird_texture_014.png",
+      "content_class": "monkey",
+      "content_label": 7,
+      "style_class": "bird",
+      "style_label": 1,
+      "content_eval_idx": 172,
+      "style_eval_idx": 89
+    },
+    {
+      "filename": "monkey_shape__bird_texture_015.png",
+      "content_class": "monkey",
+      "content_label": 7,
+      "style_class": "bird",
+      "style_label": 1,
+      "content_eval_idx": 171,
+      "style_eval_idx": 312
+    },
+    {
+      "filename": "monkey_shape__bird_texture_016.png",
+      "content_class": "monkey",
+      "content_label": 7,
+      "style_class": "bird",
+      "style_label": 1,
+      "content_eval_idx": 246,
+      "style_eval_idx": 434
+    },
+    {
+      "filename": "monkey_shape__bird_texture_017.png",
+      "content_class": "monkey",
+      "content_label": 7,
+      "style_class": "bird",
+      "style_label": 1,
+      "content_eval_idx": 91,
+      "style_eval_idx": 192
+    },
+    {
+      "filename": "monkey_shape__bird_texture_018.png",
+      "content_class": "monkey",
+      "content_label": 7,
+      "style_class": "bird",
+      "style_label": 1,
+      "content_eval_idx": 266,
+      "style_eval_idx": 363
+    },
+    {
+      "filename": "monkey_shape__bird_texture_019.png",
+      "content_class": "monkey",
+      "content_label": 7,
+      "style_class": "bird",
+      "style_label": 1,
+      "content_eval_idx": 373,
+      "style_eval_idx": 218
+    },
+    {
+      "filename": "monkey_shape__bird_texture_020.png",
+      "content_class": "monkey",
+      "content_label": 7,
+      "style_class": "bird",
+      "style_label": 1,
+      "content_eval_idx": 283,
+      "style_eval_idx": 29
+    },
+    {
+      "filename": "monkey_shape__bird_texture_021.png",
+      "content_class": "monkey",
+      "content_label": 7,
+      "style_class": "bird",
+      "style_label": 1,
+      "content_eval_idx": 169,
+      "style_eval_idx": 212
+    },
+    {
+      "filename": "monkey_shape__bird_texture_022.png",
+      "content_class": "monkey",
+      "content_label": 7,
+      "style_class": "bird",
+      "style_label": 1,
+      "content_eval_idx": 478,
+      "style_eval_idx": 323
+    },
+    {
+      "filename": "monkey_shape__bird_texture_023.png",
+      "content_class": "monkey",
+      "content_label": 7,
+      "style_class": "bird",
+      "style_label": 1,
+      "content_eval_idx": 378,
+      "style_eval_idx": 452
+    },
+    {
+      "filename": "monkey_shape__bird_texture_024.png",
+      "content_class": "monkey",
+      "content_label": 7,
+      "style_class": "bird",
+      "style_label": 1,
+      "content_eval_idx": 383,
+      "style_eval_idx": 190
+    }
+  ]
+}
