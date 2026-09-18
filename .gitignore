@@ -7,6 +7,17 @@ data_raw/
 *.tar.gz
 *.zip
 
+# Safety net: even if a config's data_root ever points at the wrong place
+# again, never track raw dataset directories by their known extracted names.
+stl10_binary/
+**/stl10_binary/
+oxford-iiit-pet/
+**/oxford-iiit-pet/
+cifar-10-batches-py/
+**/cifar-10-batches-py/
+cifar-100-python/
+**/cifar-100-python/
+
 # Environments
 .venv/
 venv/

@@ -2,7 +2,7 @@
 # Evaluate the three classifier heads + zero-shot CLIP on the clean eval subset.
 
 dataset: stl10          # stl10 | pets
-data_root: ./data
+data_root: ./data_raw
 splits_path: results/splits/stl10_splits_seed6304.json
 seed: 6304
 
