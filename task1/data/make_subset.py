@@ -25,7 +25,7 @@ from pathlib import Path
 
 import numpy as np
 
-sys.path.append(str(Path(__file__).resolve().parents[3]))  # repo root
+sys.path.append(str(Path(__file__).resolve().parents[2]))  # repo root
 from common.seed import seeded_rng  # noqa: E402
 
 SEED = 6304
