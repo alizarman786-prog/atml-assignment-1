@@ -27,7 +27,7 @@ from torch.utils.data import DataLoader
 
 sys.path.append(str(Path(__file__).resolve().parents[1] / "data"))
 sys.path.append(str(Path(__file__).resolve().parents[1] / "models"))
-sys.path.append(str(Path(__file__).resolve().parents[3]))
+sys.path.append(str(Path(__file__).resolve().parents[2]))
 
 from dataset import build_split_datasets  # noqa: E402
 from transformed_dataset import TransformedDataset  # noqa: E402
