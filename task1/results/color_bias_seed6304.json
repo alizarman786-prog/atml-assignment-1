@@ -1,0 +1,78 @@
+{
+  "dataset": "stl10",
+  "seed": 6304,
+  "interventions": {
+    "grayscale": {
+      "resnet50": {
+        "head": {
+          "top1_accuracy": 0.96,
+          "macro_f1": 0.9600990861222044,
+          "mean_max_confidence": 0.9215072393417358,
+          "accuracy_delta_vs_clean": -0.01200000000000001,
+          "prediction_consistency_vs_clean": 0.972
+        }
+      },
+      "vit_b_16": {
+        "head": {
+          "top1_accuracy": 0.964,
+          "macro_f1": 0.9638798732214158,
+          "mean_max_confidence": 0.9501930475234985,
+          "accuracy_delta_vs_clean": -0.026000000000000023,
+          "prediction_consistency_vs_clean": 0.972
+        }
+      },
+      "clip_vit_b_32": {
+        "head": {
+          "top1_accuracy": 0.954,
+          "macro_f1": 0.953953513349331,
+          "mean_max_confidence": 0.6012198328971863,
+          "accuracy_delta_vs_clean": -0.018000000000000016,
+          "prediction_consistency_vs_clean": 0.958
+        }
+      },
+      "clip_zero_shot": {
+        "top1_accuracy": 0.93,
+        "macro_f1": 0.9287785912300663,
+        "mean_max_confidence": 0.9225367307662964,
+        "accuracy_delta_vs_clean": -0.02399999999999991,
+        "prediction_consistency_vs_clean": 0.946
+      }
+    },
+    "hue_rotate_90": {
+      "resnet50": {
+        "head": {
+          "top1_accuracy": 0.928,
+          "macro_f1": 0.9281719991925351,
+          "mean_max_confidence": 0.8960452675819397,
+          "accuracy_delta_vs_clean": -0.04399999999999993,
+          "prediction_consistency_vs_clean": 0.94
+        }
+      },
+      "vit_b_16": {
+        "head": {
+          "top1_accuracy": 0.956,
+          "macro_f1": 0.9557718158715514,
+          "mean_max_confidence": 0.9351847171783447,
+          "accuracy_delta_vs_clean": -0.03400000000000003,
+          "prediction_consistency_vs_clean": 0.958
+        }
+      },
+      "clip_vit_b_32": {
+        "head": {
+          "top1_accuracy": 0.938,
+          "macro_f1": 0.9384172662984337,
+          "mean_max_confidence": 0.5668948888778687,
+          "accuracy_delta_vs_clean": -0.03400000000000003,
+          "prediction_consistency_vs_clean": 0.942
+        }
+      },
+      "clip_zero_shot": {
+        "top1_accuracy": 0.922,
+        "macro_f1": 0.9198954116921811,
+        "mean_max_confidence": 0.9153712391853333,
+        "accuracy_delta_vs_clean": -0.03199999999999992,
+        "prediction_consistency_vs_clean": 0.938
+      }
+    }
+  }
+}

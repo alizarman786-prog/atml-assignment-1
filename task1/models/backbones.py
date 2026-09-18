@@ -132,7 +132,11 @@ class CLIPBackbone(nn.Module):
         cosine similarity, as required for the zero-shot confidence metric."""
         assert self._text_features is not None, "call set_classes() first"
         img_feats = self.extract_features(images)
-        logits = self.logit_scale * img_feats @ self._text_features.T
+        # _text_features is a plain attribute (not a registered buffer), so it
+        # is NOT moved automatically by backbone.to(device) -- move it here
+        # explicitly to match img_feats' device every call.
+        text_feats = self._text_features.to(img_feats.device)
+        logits = self.logit_scale * img_feats @ text_feats.T
         return F.softmax(logits, dim=-1)
 
 

@@ -1,0 +1,38 @@
+{
+  "dataset": "stl10",
+  "seed": 6304,
+  "backbones": {
+    "resnet50": {
+      "head_val_best_acc": 0.979,
+      "head_epochs_trained": 13,
+      "clean_eval_head": {
+        "top1_accuracy": 0.972,
+        "macro_f1": 0.9721130574041797,
+        "mean_max_confidence": 0.9219987392425537
+      }
+    },
+    "vit_b_16": {
+      "head_val_best_acc": 0.987,
+      "head_epochs_trained": 16,
+      "clean_eval_head": {
+        "top1_accuracy": 0.99,
+        "macro_f1": 0.990019401940194,
+        "mean_max_confidence": 0.9713597297668457
+      }
+    },
+    "clip_vit_b_32": {
+      "head_val_best_acc": 0.99,
+      "head_epochs_trained": 27,
+      "clean_eval_head": {
+        "top1_accuracy": 0.972,
+        "macro_f1": 0.9718712075638851,
+        "mean_max_confidence": 0.6564353108406067
+      },
+      "clean_eval_zero_shot": {
+        "top1_accuracy": 0.954,
+        "macro_f1": 0.9522652319851563,
+        "mean_max_confidence": 0.940925657749176
+      }
+    }
+  }
+}
