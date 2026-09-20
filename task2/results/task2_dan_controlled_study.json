@@ -1,0 +1,26 @@
+{
+  "study": "DAN lambda_MMD",
+  "settings": {
+    "lambda_mmd=0.1": {
+      "source_mean_accuracy": 0.9390981079368411,
+      "source_mean_macro_f1": 0.9407116074190215,
+      "domain_separability_accuracy": 0.9835164835164835,
+      "target_accuracy": 0.7561720539577501,
+      "target_macro_f1": 0.7386016927675071
+    },
+    "lambda_mmd=1.0 (main)": {
+      "source_mean_accuracy": 0.9278348294729802,
+      "source_mean_macro_f1": 0.9290900336510489,
+      "domain_separability_accuracy": 0.9093406593406593,
+      "target_accuracy": 0.7111224230083991,
+      "target_macro_f1": 0.656360166602245
+    },
+    "lambda_mmd=10.0": {
+      "source_mean_accuracy": 0.8719597021744819,
+      "source_mean_macro_f1": 0.8739334886582973,
+      "domain_separability_accuracy": 0.8337912087912088,
+      "target_accuracy": 0.6902519725120896,
+      "target_macro_f1": 0.6667624490605837
+    }
+  }
+}

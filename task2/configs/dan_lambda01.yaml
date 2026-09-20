@@ -1,0 +1,26 @@
+# Task 2, Step 6: Controlled Design Study -- DAN's lambda_MMD strength.
+# Varies lambda_mmd in {0.1, 1, 10} (1.0 = the main dan.yaml comparison).
+# Every other setting identical to configs/dan.yaml.
+method: dan
+seed: 6304
+data_root: ./data_raw
+splits_path: ../shared/splits/pacs_splits_seed6304.json
+
+source_domains: [photo, art_painting, cartoon]
+target_domain: sketch
+num_classes: 7
+
+training:
+  max_epochs: 30
+  steps_per_epoch: 50
+  lr: 1.0e-4
+  weight_decay: 1.0e-4
+  early_stopping_patience: 5
+  batch_size_per_domain: 8
+  target_batch_size: 24
+  lambda_mmd: 0.1
+
+output:
+  results_dir: results
+  checkpoints_dir: results/checkpoints_lambda01
+  results_json: results/dan_lambda01_seed6304.json
