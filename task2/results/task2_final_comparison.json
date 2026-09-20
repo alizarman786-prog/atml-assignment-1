@@ -1,0 +1,292 @@
+{
+  "methods": {
+    "source_only": {
+      "source_per_domain": {
+        "photo": {
+          "accuracy": 0.972972972972973,
+          "macro_f1": 0.9680283978797605
+        },
+        "art_painting": {
+          "accuracy": 0.9146341463414634,
+          "macro_f1": 0.9151713025580938
+        },
+        "cartoon": {
+          "accuracy": 0.9189765458422174,
+          "macro_f1": 0.9282194083237348
+        }
+      },
+      "source_mean_accuracy": 0.9355278883855513,
+      "source_mean_macro_f1": 0.9371397029205296,
+      "target_metrics": {
+        "accuracy": 0.6398574700941716,
+        "macro_f1": 0.659587132048013
+      },
+      "domain_separability": {
+        "n_per_class": 1212,
+        "domain_separability_accuracy": 0.9986263736263736
+      },
+      "target_accuracy_change_vs_baseline": 0.0
+    },
+    "dan": {
+      "source_per_domain": {
+        "photo": {
+          "accuracy": 0.9669669669669669,
+          "macro_f1": 0.9651291737565604
+        },
+        "art_painting": {
+          "accuracy": 0.8975609756097561,
+          "macro_f1": 0.8961365385902208
+        },
+        "cartoon": {
+          "accuracy": 0.9189765458422174,
+          "macro_f1": 0.9260043886063654
+        }
+      },
+      "source_mean_accuracy": 0.9278348294729802,
+      "source_mean_macro_f1": 0.9290900336510489,
+      "target_metrics": {
+        "accuracy": 0.7111224230083991,
+        "macro_f1": 0.656360166602245
+      },
+      "domain_separability": {
+        "n_per_class": 1212,
+        "domain_separability_accuracy": 0.9093406593406593
+      },
+      "target_accuracy_change_vs_baseline": 0.07126495291422752,
+      "per_class_vs_baseline": {
+        "per_class_baseline_acc": {
+          "dog": 0.6748704663212435,
+          "elephant": 0.28783783783783784,
+          "giraffe": 0.5219123505976095,
+          "guitar": 0.7993421052631579,
+          "horse": 0.8443627450980392,
+          "house": 0.7875,
+          "person": 0.93125
+        },
+        "per_class_method_acc": {
+          "dog": 0.47538860103626945,
+          "elephant": 0.8067567567567567,
+          "giraffe": 0.7131474103585658,
+          "guitar": 0.9013157894736842,
+          "horse": 0.6715686274509803,
+          "house": 1.0,
+          "person": 0.73125
+        },
+        "most_improved": [
+          {
+            "class": "elephant",
+            "baseline_acc": 0.28783783783783784,
+            "method_acc": 0.8067567567567567,
+            "delta": 0.518918918918919
+          },
+          {
+            "class": "house",
+            "baseline_acc": 0.7875,
+            "method_acc": 1.0,
+            "delta": 0.21250000000000002
+          },
+          {
+            "class": "giraffe",
+            "baseline_acc": 0.5219123505976095,
+            "method_acc": 0.7131474103585658,
+            "delta": 0.19123505976095623
+          }
+        ],
+        "most_degraded": [
+          {
+            "class": "person",
+            "baseline_acc": 0.93125,
+            "method_acc": 0.73125,
+            "delta": -0.20000000000000007
+          },
+          {
+            "class": "dog",
+            "baseline_acc": 0.6748704663212435,
+            "method_acc": 0.47538860103626945,
+            "delta": -0.19948186528497402
+          },
+          {
+            "class": "horse",
+            "baseline_acc": 0.8443627450980392,
+            "method_acc": 0.6715686274509803,
+            "delta": -0.17279411764705888
+          }
+        ]
+      }
+    },
+    "dann": {
+      "source_per_domain": {
+        "photo": {
+          "accuracy": 0.924924924924925,
+          "macro_f1": 0.911881558045473
+        },
+        "art_painting": {
+          "accuracy": 0.6902439024390243,
+          "macro_f1": 0.680959637330181
+        },
+        "cartoon": {
+          "accuracy": 0.7164179104477612,
+          "macro_f1": 0.7270777018941549
+        }
+      },
+      "source_mean_accuracy": 0.7771955792705701,
+      "source_mean_macro_f1": 0.7733062990899363,
+      "target_metrics": {
+        "accuracy": 0.5209977093407991,
+        "macro_f1": 0.44934613165430976
+      },
+      "domain_separability": {
+        "n_per_class": 1212,
+        "domain_separability_accuracy": 1.0
+      },
+      "target_accuracy_change_vs_baseline": -0.11885976075337246,
+      "per_class_vs_baseline": {
+        "per_class_baseline_acc": {
+          "dog": 0.6748704663212435,
+          "elephant": 0.28783783783783784,
+          "giraffe": 0.5219123505976095,
+          "guitar": 0.7993421052631579,
+          "horse": 0.8443627450980392,
+          "house": 0.7875,
+          "person": 0.93125
+        },
+        "per_class_method_acc": {
+          "dog": 0.01683937823834197,
+          "elephant": 0.9662162162162162,
+          "giraffe": 0.301460823373174,
+          "guitar": 0.6052631578947368,
+          "horse": 0.8284313725490197,
+          "house": 0.5875,
+          "person": 0.00625
+        },
+        "most_improved": [
+          {
+            "class": "elephant",
+            "baseline_acc": 0.28783783783783784,
+            "method_acc": 0.9662162162162162,
+            "delta": 0.6783783783783783
+          },
+          {
+            "class": "horse",
+            "baseline_acc": 0.8443627450980392,
+            "method_acc": 0.8284313725490197,
+            "delta": -0.01593137254901955
+          },
+          {
+            "class": "guitar",
+            "baseline_acc": 0.7993421052631579,
+            "method_acc": 0.6052631578947368,
+            "delta": -0.19407894736842102
+          }
+        ],
+        "most_degraded": [
+          {
+            "class": "person",
+            "baseline_acc": 0.93125,
+            "method_acc": 0.00625,
+            "delta": -0.925
+          },
+          {
+            "class": "dog",
+            "baseline_acc": 0.6748704663212435,
+            "method_acc": 0.01683937823834197,
+            "delta": -0.6580310880829016
+          },
+          {
+            "class": "giraffe",
+            "baseline_acc": 0.5219123505976095,
+            "method_acc": 0.301460823373174,
+            "delta": -0.22045152722443556
+          }
+        ]
+      }
+    },
+    "cdan": {
+      "source_per_domain": {
+        "photo": {
+          "accuracy": 0.918918918918919,
+          "macro_f1": 0.9046990532270472
+        },
+        "art_painting": {
+          "accuracy": 0.6878048780487804,
+          "macro_f1": 0.6874986557042134
+        },
+        "cartoon": {
+          "accuracy": 0.7270788912579957,
+          "macro_f1": 0.7384686683528198
+        }
+      },
+      "source_mean_accuracy": 0.777934229408565,
+      "source_mean_macro_f1": 0.7768887924280268,
+      "target_metrics": {
+        "accuracy": 0.5339781114787477,
+        "macro_f1": 0.4523575145343483
+      },
+      "domain_separability": {
+        "n_per_class": 1212,
+        "domain_separability_accuracy": 0.9986263736263736
+      },
+      "target_accuracy_change_vs_baseline": -0.10587935861542386,
+      "per_class_vs_baseline": {
+        "per_class_baseline_acc": {
+          "dog": 0.6748704663212435,
+          "elephant": 0.28783783783783784,
+          "giraffe": 0.5219123505976095,
+          "guitar": 0.7993421052631579,
+          "horse": 0.8443627450980392,
+          "house": 0.7875,
+          "person": 0.93125
+        },
+        "per_class_method_acc": {
+          "dog": 0.04792746113989637,
+          "elephant": 0.9716216216216216,
+          "giraffe": 0.398406374501992,
+          "guitar": 0.6759868421052632,
+          "horse": 0.6875,
+          "house": 0.8625,
+          "person": 0.00625
+        },
+        "most_improved": [
+          {
+            "class": "elephant",
+            "baseline_acc": 0.28783783783783784,
+            "method_acc": 0.9716216216216216,
+            "delta": 0.6837837837837837
+          },
+          {
+            "class": "house",
+            "baseline_acc": 0.7875,
+            "method_acc": 0.8625,
+            "delta": 0.07500000000000007
+          },
+          {
+            "class": "guitar",
+            "baseline_acc": 0.7993421052631579,
+            "method_acc": 0.6759868421052632,
+            "delta": -0.12335526315789469
+          }
+        ],
+        "most_degraded": [
+          {
+            "class": "person",
+            "baseline_acc": 0.93125,
+            "method_acc": 0.00625,
+            "delta": -0.925
+          },
+          {
+            "class": "dog",
+            "baseline_acc": 0.6748704663212435,
+            "method_acc": 0.04792746113989637,
+            "delta": -0.6269430051813472
+          },
+          {
+            "class": "horse",
+            "baseline_acc": 0.8443627450980392,
+            "method_acc": 0.6875,
+            "delta": -0.1568627450980392
+          }
+        ]
+      }
+    }
+  }
+}

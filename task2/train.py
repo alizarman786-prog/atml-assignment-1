@@ -1,6 +1,4 @@
-"""Task 2 training entry point. Currently supports method=source_only and
-method=dan; dann/cdan will plug into the same splits/iterators/evaluation
-once added.
+"""Task 2 training entry point. Supports method in {source_only, dan, dann, cdan}.
 
 Usage (from inside task2/):
     python train.py --config configs/source_only.yaml
@@ -85,6 +83,34 @@ def main():
             lambda_mmd=hp["lambda_mmd"], max_epochs=hp["max_epochs"], steps_per_epoch=hp["steps_per_epoch"],
             lr=hp["lr"], weight_decay=hp["weight_decay"],
             patience=hp["early_stopping_patience"],
+        )
+    elif cfg["method"] == "dann":
+        from dann import train_dann
+        target_ds = PACSSubset(hf_dataset, splits["target_idx"])
+        target_iterator = build_domain_iterators(
+            {"sketch": target_ds}, batch_size_per_domain=hp["target_batch_size"],
+            transform=PACS_TRAIN_TRANSFORM,
+        )["sketch"]
+        print(f"[task2] training DANN (max_alpha={hp.get('max_alpha', 1.0)})...")
+        model, discriminator, history = train_dann(
+            model, train_iterators, target_iterator, val_datasets, args.device, PACS_EVAL_TRANSFORM,
+            max_epochs=hp["max_epochs"], steps_per_epoch=hp["steps_per_epoch"],
+            lr=hp["lr"], weight_decay=hp["weight_decay"],
+            patience=hp["early_stopping_patience"], max_alpha=hp.get("max_alpha", 1.0),
+        )
+    elif cfg["method"] == "cdan":
+        from cdan import train_cdan
+        target_ds = PACSSubset(hf_dataset, splits["target_idx"])
+        target_iterator = build_domain_iterators(
+            {"sketch": target_ds}, batch_size_per_domain=hp["target_batch_size"],
+            transform=PACS_TRAIN_TRANSFORM,
+        )["sketch"]
+        print("[task2] training CDAN...")
+        model, discriminator, history = train_cdan(
+            model, train_iterators, target_iterator, val_datasets, args.device, PACS_EVAL_TRANSFORM,
+            num_classes=cfg["num_classes"], max_epochs=hp["max_epochs"], steps_per_epoch=hp["steps_per_epoch"],
+            lr=hp["lr"], weight_decay=hp["weight_decay"],
+            patience=hp["early_stopping_patience"], max_alpha=hp.get("max_alpha", 1.0),
         )
     else:
         raise NotImplementedError(f"method {cfg['method']!r} not yet implemented")
