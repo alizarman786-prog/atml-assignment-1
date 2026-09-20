@@ -1,5 +1,6 @@
-"""Task 2 training entry point. Currently supports method=source_only;
-dan/dann/cdan will plug into the same splits/iterators once added.
+"""Task 2 training entry point. Currently supports method=source_only and
+method=dan; dann/cdan will plug into the same splits/iterators/evaluation
+once added.
 
 Usage (from inside task2/):
     python train.py --config configs/source_only.yaml
@@ -20,7 +21,7 @@ sys.path.append(str(Path(__file__).resolve().parents[1] / "shared"))
 sys.path.append(str(Path(__file__).resolve().parents[1]))
 
 from backbone import build_pacs_model  # noqa: E402
-from pacs import load_pacs_hf, PACS_TRAIN_TRANSFORM, PACS_EVAL_TRANSFORM  # noqa: E402
+from pacs import load_pacs_hf, PACSSubset, PACS_TRAIN_TRANSFORM, PACS_EVAL_TRANSFORM  # noqa: E402
 from pacs_protocol import (  # noqa: E402
     build_pacs_splits, load_pacs_splits, build_source_datasets, build_domain_iterators,
 )
@@ -68,6 +69,20 @@ def main():
         model, history = train_source_only(
             model, train_iterators, val_datasets, args.device, PACS_EVAL_TRANSFORM,
             max_epochs=hp["max_epochs"], steps_per_epoch=hp["steps_per_epoch"],
+            lr=hp["lr"], weight_decay=hp["weight_decay"],
+            patience=hp["early_stopping_patience"],
+        )
+    elif cfg["method"] == "dan":
+        from dan import train_dan
+        target_ds = PACSSubset(hf_dataset, splits["target_idx"])
+        target_iterator = build_domain_iterators(
+            {"sketch": target_ds}, batch_size_per_domain=hp["target_batch_size"],
+            transform=PACS_TRAIN_TRANSFORM,
+        )["sketch"]
+        print(f"[task2] training DAN (lambda_mmd={hp['lambda_mmd']})...")
+        model, history = train_dan(
+            model, train_iterators, target_iterator, val_datasets, args.device, PACS_EVAL_TRANSFORM,
+            lambda_mmd=hp["lambda_mmd"], max_epochs=hp["max_epochs"], steps_per_epoch=hp["steps_per_epoch"],
             lr=hp["lr"], weight_decay=hp["weight_decay"],
             patience=hp["early_stopping_patience"],
         )
