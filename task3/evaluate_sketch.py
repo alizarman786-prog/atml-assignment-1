@@ -36,7 +36,7 @@ from source_domain_separability import source_domain_separability  # noqa: E402
 from sharpness import sharpness_proxy  # noqa: E402
 from common.metrics import top1_accuracy, macro_f1  # noqa: E402
 
-sys.path.append(str(Path(__file__).resolve().parents[2] / "task2" / "evaluation"))
+sys.path.append(str(Path(__file__).resolve().parents[1] / "task2" / "evaluation"))
 from class_analysis import compare_to_baseline  # noqa: E402
 
 METHODS = ["erm", "dan_dg", "sam"]
