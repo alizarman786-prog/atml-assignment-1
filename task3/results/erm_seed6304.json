@@ -1,0 +1,22 @@
+{
+  "method": "erm",
+  "seed": 6304,
+  "history": {
+    "note": "ERM reuses Task 2's Source-only checkpoint unchanged; not retrained.",
+    "val_mean_macro_f1": 0.9371397029205296,
+    "val_per_domain": {
+      "photo": {
+        "accuracy": 0.972972972972973,
+        "macro_f1": 0.9680283978797605
+      },
+      "art_painting": {
+        "accuracy": 0.9146341463414634,
+        "macro_f1": 0.9151713025580938
+      },
+      "cartoon": {
+        "accuracy": 0.9189765458422174,
+        "macro_f1": 0.9282194083237348
+      }
+    }
+  }
+}

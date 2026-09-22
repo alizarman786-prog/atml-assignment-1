@@ -1,0 +1,22 @@
+# Task 3, Step 2: DAN-DG. Main comparison uses lambda_dg=1.
+method: dan_dg
+seed: 6304
+data_root: ./data_raw
+splits_path: ../shared/splits/pacs_splits_seed6304.json
+
+source_domains: [photo, art_painting, cartoon]
+target_domain: sketch
+num_classes: 7
+
+training:
+  max_epochs: 30
+  steps_per_epoch: 50
+  lr: 1.0e-4
+  weight_decay: 1.0e-4
+  early_stopping_patience: 5
+  batch_size_per_domain: 8
+  lambda_dg: 1.0
+
+output:
+  checkpoints_dir: results/checkpoints
+  results_json: results/dan_dg_seed6304.json
