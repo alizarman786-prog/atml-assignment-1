@@ -1,0 +1,16 @@
+# Task 4, Step 3: GCSC (Vanilla recipe + RandAugment).
+method: gcsc
+seed: 6304
+data_root: ./data_raw
+num_classes: 10
+
+training:
+  max_epochs: 100
+  batch_size: 128
+  lr: 0.1
+  momentum: 0.9
+  weight_decay: 5.0e-4
+
+output:
+  checkpoints_dir: results/checkpoints
+  results_json: results/gcsc_seed6304.json
