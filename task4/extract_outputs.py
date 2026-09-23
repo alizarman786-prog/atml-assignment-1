@@ -47,9 +47,24 @@ def extract_all_outputs(checkpoint_path: str, data_root: str, device: str,
                          num_classes: int = 10, cache_dir: str = "cache", tag: str = "vanilla"):
     """Loads `checkpoint_path` into a fresh CIFARResNet18, extracts
     features+logits for CIFAR-10 train (unaugmented)/val/test and CIFAR-100
-    near/far unknowns, and saves everything to `cache_dir/{tag}_*.npz`."""
-    model = build_cifar_resnet18(num_classes=num_classes).to(device)
-    model.load_state_dict(torch.load(checkpoint_path, map_location=device))
+    near/far unknowns, and saves everything to `cache_dir/{tag}_*.npz`.
+
+    Handles PROSER's extended head automatically: if the checkpoint's fc
+    layer has more outputs than `num_classes` (i.e. it includes dummy
+    classes), the model's fc layer is resized to match BEFORE loading, so
+    the resulting cached logits correctly include the dummy-class columns
+    (needed by evaluate_osr.py's proser_placeholder_score)."""
+    model = build_cifar_resnet18(num_classes=num_classes)
+    state_dict = torch.load(checkpoint_path, map_location=device)
+
+    ckpt_fc_out = state_dict["net.fc.weight"].shape[0]
+    if ckpt_fc_out != num_classes:
+        print(f"  checkpoint has {ckpt_fc_out} output classes (expected {num_classes}); "
+              f"resizing fc layer to match (this is expected for PROSER's dummy classes)")
+        model.net.fc = torch.nn.Linear(model.net.fc.in_features, ckpt_fc_out)
+
+    model.load_state_dict(state_dict)
+    model = model.to(device)
 
     train_ds, val_ds, test_ds = load_cifar10_splits(data_root, train_transform=EVAL_TRANSFORM)
     near_ds, far_ds = load_near_far_unknowns(data_root)
