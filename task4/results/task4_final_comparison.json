@@ -1,0 +1,180 @@
+{
+  "table1_vanilla_scores": {
+    "msp": {
+      "auroc_known_vs_near": 0.8007895625,
+      "auroc_known_vs_far": 0.8934817500000001,
+      "auroc_known_vs_all": 0.84713565625,
+      "threshold": 0.17701870203018188,
+      "known_test_acceptance_rate": 0.947,
+      "near_unknown_rejection_rate": 0.24124999999999996,
+      "far_unknown_rejection_rate": 0.42000000000000004,
+      "near_fpr_at_95tpr": 0.75875,
+      "far_fpr_at_95tpr": 0.58,
+      "all_unknown_rejection_rate": 0.33062499999999995,
+      "all_fpr_at_95tpr": 0.669375
+    },
+    "mls": {
+      "auroc_known_vs_near": 0.7858946250000001,
+      "auroc_known_vs_far": 0.8931011249999999,
+      "auroc_known_vs_all": 0.8394978750000002,
+      "threshold": -5.791820526123047,
+      "known_test_acceptance_rate": 0.9507,
+      "near_unknown_rejection_rate": 0.29500000000000004,
+      "far_unknown_rejection_rate": 0.5237499999999999,
+      "near_fpr_at_95tpr": 0.705,
+      "far_fpr_at_95tpr": 0.47625,
+      "all_unknown_rejection_rate": 0.40937500000000004,
+      "all_fpr_at_95tpr": 0.590625
+    },
+    "energy": {
+      "auroc_known_vs_near": 0.786161,
+      "auroc_known_vs_far": 0.8941080625,
+      "auroc_known_vs_all": 0.84013453125,
+      "threshold": -5.979893684387207,
+      "known_test_acceptance_rate": 0.9522,
+      "near_unknown_rejection_rate": 0.28625,
+      "far_unknown_rejection_rate": 0.53375,
+      "near_fpr_at_95tpr": 0.71375,
+      "far_fpr_at_95tpr": 0.46625,
+      "all_unknown_rejection_rate": 0.41000000000000003,
+      "all_fpr_at_95tpr": 0.59
+    },
+    "mahalanobis": {
+      "auroc_known_vs_near": 0.7838801875,
+      "auroc_known_vs_far": 0.9171831250000001,
+      "auroc_known_vs_all": 0.85053165625,
+      "threshold": 3107.4537266022003,
+      "known_test_acceptance_rate": 0.9469,
+      "near_unknown_rejection_rate": 0.25875000000000004,
+      "far_unknown_rejection_rate": 0.5137499999999999,
+      "near_fpr_at_95tpr": 0.74125,
+      "far_fpr_at_95tpr": 0.48625,
+      "all_unknown_rejection_rate": 0.38625,
+      "all_fpr_at_95tpr": 0.61375
+    }
+  },
+  "table2_model_comparison": {
+    "vanilla": {
+      "auroc_known_vs_near": 0.7858946250000001,
+      "auroc_known_vs_far": 0.8931011249999999,
+      "auroc_known_vs_all": 0.8394978750000002,
+      "threshold": -5.791820526123047,
+      "known_test_acceptance_rate": 0.9507,
+      "near_unknown_rejection_rate": 0.29500000000000004,
+      "far_unknown_rejection_rate": 0.5237499999999999,
+      "near_fpr_at_95tpr": 0.705,
+      "far_fpr_at_95tpr": 0.47625,
+      "all_unknown_rejection_rate": 0.40937500000000004,
+      "all_fpr_at_95tpr": 0.590625,
+      "closed_set_accuracy": 0.9455
+    },
+    "gcsc": {
+      "auroc_known_vs_near": 0.8115996875,
+      "auroc_known_vs_far": 0.9050865000000002,
+      "auroc_known_vs_all": 0.8583430937500001,
+      "threshold": -6.075958728790283,
+      "known_test_acceptance_rate": 0.9532,
+      "near_unknown_rejection_rate": 0.33625000000000005,
+      "far_unknown_rejection_rate": 0.55125,
+      "near_fpr_at_95tpr": 0.66375,
+      "far_fpr_at_95tpr": 0.44875,
+      "all_unknown_rejection_rate": 0.44375,
+      "all_fpr_at_95tpr": 0.55625,
+      "closed_set_accuracy": 0.9515
+    },
+    "proser": {
+      "auroc_known_vs_near": 0.61793725,
+      "auroc_known_vs_far": 0.4343546875,
+      "auroc_known_vs_all": 0.52614596875,
+      "threshold": -10.60785961151123,
+      "known_test_acceptance_rate": 0.9533,
+      "near_unknown_rejection_rate": 0.10250000000000004,
+      "far_unknown_rejection_rate": 0.04625000000000001,
+      "near_fpr_at_95tpr": 0.8975,
+      "far_fpr_at_95tpr": 0.95375,
+      "all_unknown_rejection_rate": 0.07437499999999997,
+      "all_fpr_at_95tpr": 0.925625,
+      "closed_set_accuracy": 0.9424
+    },
+    "proser_placeholder_score": {
+      "auroc_known_vs_near": 0.7480241875000001,
+      "auroc_known_vs_far": 0.9178831875000001,
+      "auroc_known_vs_all": 0.8329536875,
+      "threshold": 0.9990261197090149,
+      "known_test_acceptance_rate": 0.9537,
+      "near_unknown_rejection_rate": 0.275,
+      "far_unknown_rejection_rate": 0.6225,
+      "near_fpr_at_95tpr": 0.725,
+      "far_fpr_at_95tpr": 0.3775,
+      "all_unknown_rejection_rate": 0.44875,
+      "all_fpr_at_95tpr": 0.55125,
+      "closed_set_accuracy": 0.9424
+    }
+  },
+  "failure_cases": {
+    "near": [
+      {
+        "true_cifar100_class": "wolf",
+        "predicted_known_class": "cat",
+        "score": -8.924306869506836,
+        "threshold": -5.791820526123047
+      },
+      {
+        "true_cifar100_class": "pickup_truck",
+        "predicted_known_class": "automobile",
+        "score": -6.881213665008545,
+        "threshold": -5.791820526123047
+      },
+      {
+        "true_cifar100_class": "pickup_truck",
+        "predicted_known_class": "truck",
+        "score": -7.308600425720215,
+        "threshold": -5.791820526123047
+      },
+      {
+        "true_cifar100_class": "leopard",
+        "predicted_known_class": "cat",
+        "score": -8.681350708007812,
+        "threshold": -5.791820526123047
+      },
+      {
+        "true_cifar100_class": "camel",
+        "predicted_known_class": "horse",
+        "score": -7.439587116241455,
+        "threshold": -5.791820526123047
+      }
+    ],
+    "far": [
+      {
+        "true_cifar100_class": "chair",
+        "predicted_known_class": "airplane",
+        "score": -7.823985576629639,
+        "threshold": -5.791820526123047
+      },
+      {
+        "true_cifar100_class": "bottle",
+        "predicted_known_class": "bird",
+        "score": -8.825830459594727,
+        "threshold": -5.791820526123047
+      },
+      {
+        "true_cifar100_class": "bowl",
+        "predicted_known_class": "truck",
+        "score": -7.537208080291748,
+        "threshold": -5.791820526123047
+      },
+      {
+        "true_cifar100_class": "clock",
+        "predicted_known_class": "ship",
+        "score": -5.843236923217773,
+        "threshold": -5.791820526123047
+      },
+      {
+        "true_cifar100_class": "bowl",
+        "predicted_known_class": "dog",
+        "score": -6.3942413330078125,
+        "threshold": -5.791820526123047
+      }
+    ]
+  }
+}
