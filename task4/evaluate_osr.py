@@ -16,7 +16,7 @@ Produces:
   with predicted known class, true CIFAR-100 class name, score, threshold.
 
 Usage (from inside task4/, after extract_outputs.py for each tag you want):
-    python evaluate_osr.py --device cuda
+    python evaluate_osr.py
 """
 from __future__ import annotations
 
@@ -53,7 +53,14 @@ def top1_accuracy_from_logits(logits: np.ndarray, labels: np.ndarray, num_known:
 
 def compute_all_scores_for_tag(cache_dir: str, tag: str, num_known: int = 10) -> dict:
     """Computes MSP/MLS/Energy/Mahalanobis scores for a given cached tag,
-    on val (for calibration) / test (known) / near / far."""
+    on val (for calibration) / test (known) / near / far.
+
+    MSP/MLS/Energy are computed on ONLY the first num_known logit columns
+    -- critical for PROSER, whose cached logits have num_known+num_dummy
+    columns: without this slice, max_k/logsumexp would include the dummy
+    classes, silently changing what these scores measure and breaking the
+    "common score" comparison across Vanilla/GCSC/PROSER. Mahalanobis is
+    unaffected (it uses features, not logits)."""
     train = load_cached(cache_dir, tag, "train")
     val = load_cached(cache_dir, tag, "val")
     test = load_cached(cache_dir, tag, "test")
@@ -73,8 +80,10 @@ def compute_all_scores_for_tag(cache_dir: str, tag: str, num_known: int = 10) ->
     ]:
         if logit_fn is not None:
             scores[score_name] = {
-                "val": logit_fn(val["logits"]), "test": logit_fn(test["logits"]),
-                "near": logit_fn(near["logits"]), "far": logit_fn(far["logits"]),
+                "val": logit_fn(val["logits"][:, :num_known]),
+                "test": logit_fn(test["logits"][:, :num_known]),
+                "near": logit_fn(near["logits"][:, :num_known]),
+                "far": logit_fn(far["logits"][:, :num_known]),
             }
         else:
             scores[score_name] = {

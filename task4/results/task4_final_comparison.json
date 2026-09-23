@@ -83,17 +83,17 @@
       "closed_set_accuracy": 0.9515
     },
     "proser": {
-      "auroc_known_vs_near": 0.61793725,
-      "auroc_known_vs_far": 0.4343546875,
-      "auroc_known_vs_all": 0.52614596875,
-      "threshold": -10.60785961151123,
-      "known_test_acceptance_rate": 0.9533,
-      "near_unknown_rejection_rate": 0.10250000000000004,
-      "far_unknown_rejection_rate": 0.04625000000000001,
-      "near_fpr_at_95tpr": 0.8975,
-      "far_fpr_at_95tpr": 0.95375,
-      "all_unknown_rejection_rate": 0.07437499999999997,
-      "all_fpr_at_95tpr": 0.925625,
+      "auroc_known_vs_near": 0.7676134375,
+      "auroc_known_vs_far": 0.8743645,
+      "auroc_known_vs_all": 0.82098896875,
+      "threshold": -4.063405990600586,
+      "known_test_acceptance_rate": 0.9515,
+      "near_unknown_rejection_rate": 0.28,
+      "far_unknown_rejection_rate": 0.48,
+      "near_fpr_at_95tpr": 0.72,
+      "far_fpr_at_95tpr": 0.52,
+      "all_unknown_rejection_rate": 0.38,
+      "all_fpr_at_95tpr": 0.62,
       "closed_set_accuracy": 0.9424
     },
     "proser_placeholder_score": {
