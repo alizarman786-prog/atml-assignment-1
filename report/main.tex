@@ -1,183 +1,575 @@
 \documentclass{article}
 
-% if you need to pass options to natbib, use, e.g.:
-%     \PassOptionsToPackage{numbers, compress}{natbib}
-% before loading neurips_2026
-
 \usepackage[final]{neurips_2026}
 
-\usepackage[utf8]{inputenc} % allow utf-8 input
-\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
-\usepackage{hyperref}       % hyperlinks
-\usepackage{url}            % simple URL typesetting
-\usepackage{booktabs}       % professional-quality tables
-\usepackage{amsfonts}       % blackboard math symbols
-\usepackage{nicefrac}       % compact symbols for 1/2, etc.
-\usepackage{microtype}      % microtypography
-\usepackage{xcolor}         % colors
-\usepackage{graphicx}       % figures
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsfonts}
+\usepackage{nicefrac}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{8pt}{4pt}
+\titlespacing*{\subsection}{0pt}{6pt}{3pt}
+\titlespacing*{\subsubsection}{0pt}{5pt}{2pt}
+\titlespacing*{\paragraph}{0pt}{4pt}{2pt}
 
 \title{Beyond IID and Closed-Set Learning: Inductive Biases, Domain Shift, and Open-Set Recognition}
 
 \author{%
   Zarman Ali Awan \\
   28100092 \\
-  \texttt{zarman.awan@lums.edu.pk}
+  \texttt{28100092@lums.edu.pk}
 }
 
 \begin{document}
 
 \maketitle
+\renewcommand{\arraystretch}{0.7}
+\setlength{\textfloatsep}{6pt plus 2pt minus 2pt}
+\setlength{\floatsep}{4pt plus 2pt minus 2pt}
+\setlength{\intextsep}{4pt plus 2pt minus 2pt}
+\setlength{\abovecaptionskip}{3pt}
+\setlength{\belowcaptionskip}{2pt}
+\setlength{\tabcolsep}{3.5pt}
 
 \begin{abstract}
-  One-paragraph summary: what you studied across the four tasks, the main
-  findings, and a link to your code.
-  GitHub repository: \url{https://github.com/alizarman786-prog/atml-assignment-1}
+A well-trained model is commonly assumed to have learned a representation suited to its task, one that generalizes to new domains and abstains when faced with inputs outside its training distribution. We put this assumption to a direct test across four settings spanning inductive bias, domain adaptation, domain generalization, and open-set recognition, on STL-10, PACS, and CIFAR-10/100. We find that models reaching near-identical closed-set accuracy rely on markedly different cues: CLIP recognizes objects by shape far more than ResNet-50 does (86.8\% vs.\ 70.6\% shape bias), yet this advantage disappears under spatial patch shuffling, where CLIP degrades the most of the three architectures tested, shape reliance and spatial-layout reliance are separable properties, not two faces of the same robustness. Under domain shift, we show that alignment only helps when it succeeds at its own stated objective: MMD-based alignment reduces source-target separability and improves accuracy on an unseen domain by 7.1 points, while adversarial alignment fails to reduce separability under an identical protocol and performs worse than doing nothing. When the target domain is withheld entirely, sharpness-aware minimization alone recovers much of this gap by seeking flat minima without ever observing a target-domain image, while a target-free version of the alignment method that worked with target access recovers less than half of its original gain, a direct, quantified answer to what unlabeled target data is actually worth. Finally, we show that rejecting unfamiliar inputs is not one problem but two: every scoring rule tested separates known classes from distant unknowns far more easily than from semantically close ones, and stronger augmentation during training improves closed-set accuracy and open-set rejection simultaneously rather than trading one for the other. Code, configurations, and results: \url{https://github.com/alizarman786-prog/atml-assignment-1}.
 \end{abstract}
 
 \section{Introduction}
-Motivate the IID / closed-set breakdown; state the four tasks and the
-research questions you will answer; preview the cross-task synthesis
-question (what should a robust representation preserve, become invariant
-to, and reject).
+The main assumption for supervised learning is that training and evaluation data are independently and identically distributed and collectively share a closed label space. However, neither of these hold true when the model is actually deployed, there might be a completely new evaluation domain or the input may belong to some unknown class. High IID accuracy is consistent with many underlying strategies, some of which are far more brittle than others \citep{geirhos2019imagenet}.
+
+This report examines four of such failures. Task 1 identifies which visual cues different architectures rely on, and whether this reliance is observable in their representation and prediction levels. Task 2 studies domain adaptation with unlabeled target data available. Task 3 takes it one step further by removing this access to unlabeled target data and inquires whether invariant representations or sharpness aware optimization aid generalization to an unseen domain instead. Task 4 on the other hand asks whether a classifier can just reject inputs from unknown classes rather than force a label onto them. Throughout, we ask what a robust representation should preserve, become invariant to, and when should it outright just reject the input.
 
 \section{Experimental Setup}
-Shared conventions across tasks: seed 6304, datasets used (STL-10/Pets,
-PACS, CIFAR-10/100), backbones, and any protocol details worth stating once
-instead of repeating per task.
+All experiments use a fixed seed of 6304 for splitting, subset selection, and comparisons. Task 1 uses STL-10; Tasks 2 to 3 share the PACS benchmark; Task 4 uses CIFAR-10 (known) and a fixed CIFAR-100 subset (unknown). Task-specific architectures and training budgets are given in each task's own setup subsection.
 
 \section{Task 1: Inductive Biases and Feature Representations}
 \label{sec:task1}
 
 \subsection{Setup and Design Choices}
-Dataset choice, cue-conflict class pairs and style strength, additional
-color intervention, representation-visualization settings -- each stated
-with a hypothesis and metric before interpreting results.
+We use STL-10 over Oxford-IIIT Pets for its lower cost and coarser, more visually distinct classes, which make cue-conflicts easier to construct and interpret. We compare three frozen backbones, ResNet-50~\citep{he2016resnet}, ViT-B/16~\citep{dosovitskiy2021vit}, and OpenCLIP ViT-B/32~\citep{radford2021clip}, each with a linear head trained on frozen features (AdamW, lr $10^{-3}$, weight decay $10^{-4}$, patience~5), plus CLIP zero-shot with the fixed prompt ``a photo of a \{class\}.'' All interventions use a fixed, class-balanced 500-image evaluation subset shared across models.
+
+For cue-conflicts (Section~\ref{sec:t1-shapetexture}) we use AdaIN~\citep{huang2017adain} with the authors' pretrained weights, over five class pairs chosen for visually distinct textures (cat/dog, deer/horse, airplane/ship, car/truck, bird/monkey), generated in both directions. For color bias we use grayscale and a fixed $90^\circ$ hue rotation, the latter hypothesized to be more disruptive since it contradicts rather than merely removes the color cue. For representation visualization (Section~\ref{sec:t1-representation}) we fit t-SNE~\citep{vandermaaten2008tsne} jointly on clean and transformed features from the same fixed subset and seed.
 
 \subsection{Results}
-\paragraph{Clean baseline.} Top-1 accuracy, macro-F1, mean max confidence
-for the three heads and zero-shot CLIP (Table~\ref{tab:t1-clean}).
 
-\begin{table}[h]
-  \caption{Task 1 clean baseline. Fill in from \texttt{results/clean\_baseline\_seed6304.json}.}
-  \label{tab:t1-clean}
+\paragraph{Clean baseline and color bias.}
+Table~\ref{tab:t1-clean-color} reports clean accuracy and color-bias accuracy change/consistency. All models tolerate grayscale better than hue rotation, ResNet-50 most affected by the latter, suggesting reliance on calibrated color statistics rather than mere color presence.
+
+\begin{table}[t]
+  \caption{Task~1 clean baseline and color-bias results (500-image STL-10 eval subset). $\Delta$Acc.\ and Cons.\ are relative to each model's own clean predictions.}
+  \label{tab:t1-clean-color}
   \centering
-  \begin{tabular}{lccc}
+  \footnotesize
+  \begin{tabular}{lccc|cc|cc}
     \toprule
-    Model & Top-1 Acc. & Macro-F1 & Mean Max Conf. \\
+    & \multicolumn{3}{c|}{Clean} & \multicolumn{2}{c|}{Grayscale} & \multicolumn{2}{c}{Hue rotation ($90^\circ$)} \\
+    Model & Acc. & Macro-F1 & Conf. & $\Delta$Acc. & Cons. & $\Delta$Acc. & Cons. \\
     \midrule
-    ResNet-50 (head)   & & & \\
-    ViT-B/16 (head)    & & & \\
-    CLIP ViT-B-32 (head) & & & \\
-    CLIP zero-shot     & & & \\
+    ResNet-50 (head)      & 0.972 & 0.972 & 0.922 & $-0.012$ & 0.972 & $-0.044$ & 0.940 \\
+    ViT-B/16 (head)       & 0.990 & 0.990 & 0.971 & $-0.026$ & 0.972 & $-0.034$ & 0.958 \\
+    CLIP (head)           & 0.972 & 0.972 & 0.656 & $-0.018$ & 0.958 & $-0.034$ & 0.942 \\
+    CLIP (zero-shot)      & 0.954 & 0.952 & 0.941 & $-0.024$ & 0.946 & $-0.032$ & 0.938 \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-\paragraph{Color bias.} Grayscale and the chosen additional color
-intervention: accuracy change and prediction consistency relative to clean.
+\paragraph{Shape vs.\ texture.}
+\label{sec:t1-shapetexture}
+AdaIN produced 250 valid cue-conflicts (25 per pair per direction, 0 rejected under our fixed rule: discard non-finite or near-constant-color outputs). Table~\ref{tab:t1-shapebias} shows ResNet-50 is markedly more texture-biased than either transformer model, consistent with known CNN texture bias~\citep{geirhos2019imagenet}, with high coverage throughout.
 
-\paragraph{Shape vs. texture.} Shape bias and coverage per model (report
-$N_\text{shape}$, $N_\text{texture}$, $N_\text{other}$ counts too).
-
-\paragraph{Translation.} Accuracy/consistency curve against displacement
-(Figure~\ref{fig:translation}).
-
-\begin{figure}[h]
+\begin{table}[t]
+  \caption{Shape bias and coverage on 250 cue-conflict images. $N_\text{shape}$, $N_\text{texture}$, $N_\text{other}$ are mutually exclusive prediction categories.}
+  \label{tab:t1-shapebias}
   \centering
-  % \includegraphics[width=0.7\linewidth]{figures/translation_curve.pdf}
-  \caption{Accuracy and prediction consistency vs.\ translation displacement, per backbone.}
+  \footnotesize
+  \begin{tabular}{lcccccc}
+    \toprule
+    Model & $N_\text{shape}$ & $N_\text{texture}$ & $N_\text{other}$ & Shape bias (\%) & Coverage (\%) \\
+    \midrule
+    ResNet-50 (head) & 142 & 59 & 49 & 70.6 & 80.4 \\
+    ViT-B/16 (head)  & 188 & 34 & 28 & 84.7 & 88.8 \\
+    CLIP (head)      & 190 & 29 & 31 & 86.8 & 87.6 \\
+    CLIP (zero-shot) & 178 & 37 & 35 & 82.8 & 86.0 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Individual images often produce the same outcome across models rather than idiosyncratic single-model behavior (Table~\ref{tab:t1-examples}): \texttt{cat\_shape\_\_dog\_texture\_001} is classified by shape by all four models; \texttt{dog\_shape\_\_cat\_texture\_000} is classified by texture by both ResNet-50 and ViT-B/16; and \texttt{cat\_shape\_\_dog\_texture\_000} is misclassified as an unrelated class (bird) by three of four models, suggesting this failure stems from that specific stylization rather than a general cat/dog weakness.
+
+\begin{table}[t]
+  \caption{Representative cue-conflict outcomes where the same result recurs across multiple models on the same image. Filenames abbreviated as \texttt{(shape)\_\_(texture)\_(index)}.}
+  \label{tab:t1-examples}
+  \centering
+  \footnotesize
+  \begin{tabular}{lccp{4.2cm}c}
+    \toprule
+    Image & Shape & Texture & Models (prediction) & Outcome \\
+    \midrule
+    \texttt{cat\_\_dog\_001} & cat & dog & ResNet-50, ViT-B/16, CLIP (head), CLIP (zero-shot) $\to$ cat & Shape agreement (4/4) \\
+    \texttt{dog\_\_cat\_000} & dog & cat & ResNet-50, ViT-B/16 $\to$ cat & Texture disagreement (2/4) \\
+    \texttt{cat\_\_dog\_000} & cat & dog & ResNet-50, CLIP (head), CLIP (zero-shot) $\to$ bird & Convergent other-failure (3/4) \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{Translation.}
+Figure~\ref{fig:translation} plots accuracy and consistency against displacement (0--32px, averaged over four directions). All models degrade gently in accuracy, but CLIP's consistency separates clearly from the other two despite comparable accuracy loss, accuracy alone does not reveal how much a model's decisions move under an intervention.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.78\linewidth]{figures/translation_curve.png}
+  \caption{Accuracy (a) and prediction consistency (b) vs.\ translation displacement, averaged over four cardinal directions, relative to each model's clean predictions. CLIP's consistency is visibly least stable despite similar accuracy loss to ResNet-50 and ViT-B/16.}
   \label{fig:translation}
 \end{figure}
 
-\paragraph{Patch structure.} Accuracy drop and prediction consistency under
-4x4 patch shuffling.
+\paragraph{Patch structure.}
+Table~\ref{tab:t1-patchshuffle} shows a single shared, non-identity $4{\times}4$ patch permutation reverses the shape-bias ordering: ResNet-50 is most robust despite lower shape bias, while CLIP degrades most, its zero-shot confidence collapsing from $0.941$ to $0.791$. Shape bias and robustness to spatial disruption are therefore dissociable.
 
-\paragraph{Representation analysis.} Cosine stability $I_T$ per
-intervention; t-SNE/UMAP visualizations of clean vs.\ transformed features.
+\begin{table}[t]
+  \caption{Effect of one shared $4{\times}4$ patch-shuffle permutation (identical images across models), relative to clean predictions.}
+  \label{tab:t1-patchshuffle}
+  \centering
+  \footnotesize
+  \begin{tabular}{lccc}
+    \toprule
+    Model & Acc. & $\Delta$Acc. & Cons. \\
+    \midrule
+    ResNet-50 (head) & 0.908 & $-0.064$ & 0.924 \\
+    ViT-B/16 (head)  & 0.890 & $-0.100$ & 0.896 \\
+    CLIP (head)      & 0.802 & $-0.170$ & 0.804 \\
+    CLIP (zero-shot) & 0.798 & $-0.156$ & 0.800 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{Representation analysis.}
+\label{sec:t1-representation}
+Table~\ref{tab:t1-representation} reports cosine stability $I_T$. For ResNet-50 and ViT-B/16, $I_T$ decreases with intervention intensity as expected (translation $>$ grayscale $>$ patch-shuffle $>$ cue-conflict). CLIP breaks this pattern: its cue-conflict $I_T$ nearly matches its patch-shuffle $I_T$, roughly $1.7\times$ higher than the other two models' cue-conflict $I_T$, comparatively insensitive to exactly the intervention that dominates its prediction-level shape bias. Figure~\ref{fig:tsne} shows this qualitatively: ResNet-50 and ViT-B/16 mix clean and shuffled points within class clusters, while CLIP splits into two condition-specific macro-regions, suggesting its disruption is more systematic across images.
+
+\begin{table}[t]
+  \caption{Representation-stability $I_T$ (mean paired cosine similarity) per intervention. Translation is averaged over four directions at 32px; cue-conflict pairs each stylized image with its own content-source image.}
+  \label{tab:t1-representation}
+  \centering
+  \footnotesize
+  \begin{tabular}{lcccc}
+    \toprule
+    Model & Grayscale & Translation (32px) & Patch-shuffle & Cue-conflict \\
+    \midrule
+    ResNet-50 & 0.788 & 0.924 & 0.689 & 0.425 \\
+    ViT-B/16  & 0.738 & 0.922 & 0.669 & 0.432 \\
+    CLIP      & 0.895 & 0.970 & 0.733 & 0.751 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.32\linewidth]{figures/tsne_resnet50_clean_vs_patchshuffle.png}
+  \includegraphics[width=0.32\linewidth]{figures/tsne_vit_b_16_clean_vs_patchshuffle.png}
+  \includegraphics[width=0.32\linewidth]{figures/tsne_clip_vit_b_32_clean_vs_patchshuffle.png}
+  \caption{t-SNE of clean (circles) vs.\ patch-shuffled (crosses) features, colored by class, for ResNet-50, ViT-B/16, and CLIP (left to right). ResNet-50/ViT-B/16 mix conditions within class clusters; CLIP separates into two condition-specific macro-regions.}
+  \label{fig:tsne}
+\end{figure}
 
 \subsection{Discussion}
-Answer Task 1's four research questions (cue reliance and coverage;
-locality/positional sensitivity; prediction-representation agreement;
-architecture vs.\ pretraining/data attribution).
 
-\section{Task 2: Unsupervised Domain Adaptation}
+\paragraph{RQ1: Color bias and cue-conflict}
+
+Color bias and cue-conflict measure related but distinct things: the grayscale/hue ablations test sensitivity to a cue in isolation, while cue-conflict tests which cue wins when shape and texture disagree. Together they show color is treated as secondary to shape and texture, since every model's accuracy drop is smaller under grayscale ($-0.012$ to $-0.026$) than under an implausible 90 degree hue rotation ($-0.032$ to $-0.044$), so models seem calibrated to a plausible color range rather than any specific hue. Under cue-conflict, ResNet-50 is markedly more texture-biased (70.6\% shape bias) than ViT-B/16 (84.7\%) or CLIP (86.8\%), matching the known CNN texture bias reported by \citet{geirhos2019imagenet}. High coverage across all four models (80.4 to 88.8\%) means these shape-bias numbers are not artifacts of a small unrepresentative subset.
+
+\paragraph{RQ2: Translation and patch shuffling}
+
+ResNet-50, ViT-B/16, and CLIP are all highly robust to translation, staying above 0.958 consistency even at the largest 32px shift. This makes sense, an object's position in the frame should not change its class. ResNet-50's convolution filters act locally with shared weights, giving it a built-in translation-equivariant bias. ViT and CLIP reach similar robustness despite lacking this built-in property, likely because self-attention lets patches exchange information regardless of position, and a pure shift does not change how the patches relate to each other.
+
+Patch shuffling is a harsher test since it keeps every patch's content but destroys the arrangement between them. Here the pattern flips: ViT-B/16 drops more ($-0.100$) than ResNet-50 ($-0.064$) despite being more shape-biased at the prediction level, and CLIP drops the most of all ($-0.170$/$-0.156$). This fits ViT's reliance on positional embeddings, shuffling patches keeps the same local content but assigns it to the wrong position, confusing a model that treats position as meaningful \citep{raghu2021vit}. ResNet-50 is hurt less because it builds its representation through local, hierarchical convolution rather than a set of explicitly positioned tokens.
+
+\paragraph{RQ3: Prediction-level vs representation-level agreement}
+
+CLIP's representation stability under cue-conflict ($I_T = 0.751$) is far higher than ResNet-50 (0.425) or ViT-B/16 (0.432), and this agrees with CLIP's prediction-level shape bias (86.8\% head, 82.8\% zero-shot), its internal features barely move under texture-swap and its predictions still mostly follow shape.
+
+A clear mismatch shows up in ViT-B/16. At the prediction level it is strongly shape-biased (84.7\%), close to CLIP, but its representation stability under the same intervention ($I_T = 0.432$) is almost as low as ResNet-50's far more texture-biased representation. So ViT's final decisions consistently favor shape even though its internal representation moves a lot under texture-swap, prediction-level shape bias and representation stability, which line up cleanly for CLIP, are decoupled for ViT.
+
+Comparing CLIP's trained head against zero-shot isolates the decision rule while the representation stays exactly the same, since both use the identical frozen embedding. The head beats zero-shot by a small margin everywhere (top-1 0.972 vs 0.954, shape bias 86.8\% vs 82.8\%, patch-shuffle accuracy 0.802 vs 0.798), so the linear probe is recovering some task-specific structure from the shared representation that a fixed text-prompt comparison cannot get to.
+
+\paragraph{RQ4: Architecture vs pretraining data}
+
+Since CLIP's image encoder is itself a ViT, close in architecture to the standalone ViT-B/16, the gap between them ($I_T$ under cue-conflict 0.751 vs 0.432, shape bias 86.8\% vs 84.7\%) is unlikely to come from architecture. It more likely comes from CLIP's different pretraining, contrastive matching against captions over roughly 400 million image-text pairs \citep{radford2021clip}, versus ViT-B/16's standard 1000-way supervised classification on ImageNet \citep{dosovitskiy2021vit}. ImageNet's fixed labels can often be solved with texture alone \citep{geirhos2019imagenet}, so supervised training gives no real pressure toward shape, while matching an image to a caption rewards identifying what an object is rather than what its surface looks like.
+
+The larger gap between ResNet-50 and the two transformer models (70.6\% vs 84.7\%/86.8\% shape bias) looks more architectural. ResNet-50's convolutions aggregate information locally, which fits naturally with texture-based strategies, while ViT's self-attention mixes information across the whole object more freely, which fits better with shape-based strategies.
+\section{Task 2: Domain Adaptation}
 \label{sec:task2}
 
-\subsection{Setup}
-PACS, Sketch as target, Photo/Art/Cartoon as sources; frozen BatchNorm
-policy; training/optimization settings.
+\subsection{Setup and Design Choices}
+
+We use PACS, comprising 7 shared object categories rendered in four visual styles. Photo, Art Painting, and Cartoon serve as labeled source domains; Sketch is the target domain, held out as unlabeled during training and used only for final evaluation. Within each source domain we take a stratified 80/20 train/validation split (seed 6304); model selection throughout uses mean source-validation macro-F1 across the three source domains, never the target.
+
+Following common practice in domain-adaptive fine-tuning, we freeze every BatchNorm layer's running mean and variance at their pretrained ImageNet values for every method, while its affine scale and shift parameters remain trainable.
+
+Each training step draws a domain-balanced batch: 8 images from each source domain (24 total), plus 24 unlabeled target images for the three adaptation methods (DAN, DANN, CDAN), giving equal total source and target batch sizes. Source-only omits the target batch and adaptation loss entirely, providing the domain-gap baseline against which DAN, DANN, and CDAN are measured.
 
 \subsection{Results}
-Source-only, DAN, DANN, CDAN comparison table (per-source validation, mean,
-target accuracy/macro-F1, target change, domain separability); alignment
-training curves; per-class transfer; controlled $\lambda_\text{MMD}$ or
-gradient-reversal-strength study.
+
+\paragraph{Domain gap and method comparison.}
+Table~\ref{tab:t2-main} reports source and target performance for all four methods. Source-only shows a substantial domain gap (28 macro-F1 points) despite never having seen Sketch during training. DAN is the only method that both improves target accuracy over Source-only and reduces source-target domain separability. DANN and CDAN underperform Source-only on every metric, including source performance itself, which we trace to training instability discussed below.
+
+\begin{table}[t]
+  \caption{Task~2 main comparison. Domain separability is held-out accuracy of a logistic-regression classifier distinguishing source from target features (chance $=0.5$).}
+  \label{tab:t2-main}
+  \centering
+  \footnotesize
+  \begin{tabular}{lcccccc}
+    \toprule
+    Method & Source mean Acc. & Source mean F1 & Target Acc. & Target F1 & $\Delta$ Target Acc. & Domain Sep. \\
+    \midrule
+    Source-only & 0.936 & 0.937 & 0.640 & 0.660 & --      & 0.999 \\
+    DAN         & 0.928 & 0.929 & 0.711 & 0.656 & $+0.071$ & 0.909 \\
+    DANN        & 0.777 & 0.773 & 0.521 & 0.449 & $-0.119$ & 1.000 \\
+    CDAN        & 0.778 & 0.777 & 0.534 & 0.452 & $-0.106$ & 0.999 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Figure~\ref{fig:t2-curves} shows representative training curves for all four methods, confirming DAN trained stably over its full 16 epochs while DANN and CDAN's domain loss diverged within the first few epochs and never recovered.
+
+\begin{table}[t]
+  \caption{Per-source-domain validation accuracy, all four Task~2 methods.}
+  \label{tab:t2-perdomain}
+  \centering
+  \footnotesize
+  \begin{tabular}{lccc}
+    \toprule
+    Method & Photo & Art Painting & Cartoon \\
+    \midrule
+    Source-only & 0.973 & 0.915 & 0.919 \\
+    DAN         & 0.967 & 0.898 & 0.919 \\
+    DANN        & 0.925 & 0.690 & 0.716 \\
+    CDAN        & 0.919 & 0.688 & 0.727 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.78\linewidth]{figures/task2_training_curves.png}
+  \caption{Training curves for all four Task~2 methods. (a) DAN's classification and MMD losses both decline smoothly over its full 16 epochs. (b) DANN and CDAN's domain loss (log scale), which should settle near $\ln 2 \approx 0.69$ (dashed line) if the discriminator is being successfully confused, instead diverges sharply within 2 to 3 epochs and plateaus at a stable but pathological level, CDAN ($\sim$230 to 280) far higher than DANN ($\sim$22 to 27), consistent with CDAN's higher-dimensional discriminator input.}
+  \label{fig:t2-curves}
+\end{figure}
+
+\paragraph{DAN: MMD alignment.}
+DAN adds a multi-kernel RBF Maximum Mean Discrepancy penalty~\citep{long2015dan} between source and target features to the classification loss, trained stably throughout. Table~\ref{tab:t2-perclass} shows this aggregate gain is uneven at the class level: DAN dramatically corrects Source-only's worst class, elephant, but degrades three previously strong classes by comparable margins, consistent with DAN's flat macro-F1 despite its clear accuracy gain.
+
+\begin{table}[t]
+  \caption{Per-class Sketch accuracy, Source-only baseline vs.\ each adaptation method.}
+  \label{tab:t2-perclass}
+  \centering
+  \footnotesize
+  \begin{tabular}{lcccc}
+    \toprule
+    Class & Source-only & DAN & DANN & CDAN \\
+    \midrule
+    dog      & 0.675 & 0.475 & 0.017 & 0.048 \\
+    elephant & 0.288 & 0.807 & 0.966 & 0.972 \\
+    giraffe  & 0.522 & 0.713 & 0.301 & 0.398 \\
+    guitar   & 0.799 & 0.901 & 0.605 & 0.676 \\
+    horse    & 0.844 & 0.672 & 0.828 & 0.688 \\
+    house    & 0.788 & 1.000 & 0.588 & 0.863 \\
+    person   & 0.931 & 0.731 & 0.006 & 0.006 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{DANN and CDAN: adversarial alignment.}
+DANN~\citep{ganin2016dann} and CDAN~\citep{long2018cdan} replace MMD with a domain discriminator trained adversarially through a gradient-reversal layer, CDAN additionally conditioning it on the predicted class via a multilinear map. Both became severely unstable once the reversal strength exceeded roughly 0.2--0.25 of its scheduled maximum, domain loss diverging from $\sim$0.5 to a pathological plateau, CDAN's ($\sim$230--280) far higher than DANN's ($\sim$22--27), consistent with its higher-dimensional discriminator input (3584-d vs.\ 512-d). We stabilized training by skipping batches whose loss exceeded a fixed threshold, which prevented divergence but froze source validation macro-F1 from epoch 2 onward for both methods, explaining their lower final source performance. Table~\ref{tab:t2-perclass} shows both collapsed to the same degenerate pattern: person and dog near-zero while elephant saturates near 97\%, a shared mode-collapse rather than two independent failures.
+
+\paragraph{Controlled study: MMD strength.}
+Table~\ref{tab:t2-controlled} sweeps DAN's $\lambda_\text{MMD}$ over $\{0.1, 1, 10\}$. Separability decreases monotonically as $\lambda_\text{MMD}$ increases, but source and target performance both peak at the weakest setting and decline monotonically as alignment strengthens further.
+
+\begin{table}[t]
+  \caption{DAN controlled study over MMD weight $\lambda_\text{MMD}$.}
+  \label{tab:t2-controlled}
+  \centering
+  \footnotesize
+  \begin{tabular}{lcccc}
+    \toprule
+    $\lambda_\text{MMD}$ & Source mean F1 & Domain Sep. & Target Acc. & Target F1 \\
+    \midrule
+    0.1            & 0.941 & 0.984 & 0.756 & 0.739 \\
+    1.0 (main)     & 0.929 & 0.909 & 0.711 & 0.656 \\
+    10.0           & 0.874 & 0.834 & 0.690 & 0.667 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
 \subsection{Discussion}
-Answer Task 2's four research questions (domain gap and failing classes;
-separability vs.\ recognition; class-conditional vs.\ marginal alignment;
-alignment-strength trade-off).
 
+\paragraph{RQ1: Source-only domain gap}
+
+There is a 28-point gap between Source-only's mean source macro-F1 (0.937) and its Sketch macro-F1 (0.660). The biggest failure is the elephant class, which sits at 0.288 accuracy, a large margin below the next-worst class, giraffe, at 0.522. This is plausibly due to the more abstract and varied way animals are rendered in sketches compared to the source domains, elephant sketches likely diverge from photographic, painted, and cartoon elephants more than a class like person or guitar, whose sketched outlines stay closer to their source-domain appearance.
+
+\paragraph{RQ2: Domain separability vs.\ target recognition}
+
+Yes for DAN: as separability decreases from 0.999 to 0.909, target accuracy increases by 7.1 points. DAN is, however, the only method that both reduced separability and improved over baseline. DANN and CDAN's separability barely moved from 1.000, and both underperformed baseline on every metric, they also suffered exploding losses due to training instability. The $\lambda_\text{MMD}$ sweep reinforces this relationship in a different, non-monotonic way: separability keeps improving as $\lambda_\text{MMD}$ increases, but target performance does not, peaking at $\lambda_\text{MMD}=0.1$ and worst at $\lambda_\text{MMD}=10$, an inverted-U rather than a straight line. Lower separability corresponds to better target recognition only up to a point, beyond which further alignment pressure removes information the classifier still needs.
+
+\paragraph{RQ3: Marginal vs.\ class-conditional alignment}
+
+CDAN, with a target accuracy of 0.534, barely outperforms DANN's 0.521, and both sit far below DAN's 0.711 and, surprisingly, even below Source-only's 0.640. CDAN and DANN suffered the same training instability, with domain loss exploding as the gradient-reversal strength ramps up. CDAN's instability was arguably worse, its loss plateaued around 230 to 280 versus DANN's 22 to 27, which we link to CDAN's higher-dimensional discriminator input (3584-d vs.\ 512-d). Separate optimizers for the classifier and discriminator, and mild hyperparameter tuning, gave no meaningful improvement. Under this protocol, CDAN's results do not support class-conditional alignment helping over marginal alignment, since neither method reached a stable enough training regime to test that hypothesis fairly; the comparison is confounded by instability rather than a clean test of conditioning.
+
+\paragraph{RQ4: Alignment strength trade-off and target-free model selection}
+
+As $\lambda_\text{MMD}$ increases, source performance monotonically worsens, falling from 0.941 to 0.929 to 0.874 as $\lambda_\text{MMD}$ goes from 0.1 to 1 to 10. Target performance worsens alongside it, even though separability keeps improving. Since $\lambda_\text{MMD}=0.1$ has both the best source performance and the best target performance simultaneously, a model-selection rule based on source validation performance alone would have identified the best setting here without ever consulting Sketch labels.
 \section{Task 3: Domain Generalization}
 \label{sec:task3}
 
-\subsection{Setup}
-Same PACS protocol as Task 2, Sketch fully unseen; ERM/DAN-DG/SAM.
+\subsection{Setup and Design Choices}
+
+Task 3 follows the same PACS protocol as Task 2 (Section~\ref{sec:task2}): the same backbone, frozen BatchNorm policy, source splits, and optimizer settings, with one change: Sketch is fully unseen, not just unlabeled, no target images of any kind are used until final evaluation. ERM is not retrained; it is exactly Task 2's Source-only checkpoint, reused unchanged, since the two are defined identically. DAN-DG applies the same MMD mechanism as Task 2's DAN, but pairwise between the three source domains rather than source-to-target. SAM instead seeks flat minima directly, with no domain-alignment term at all, using $\rho=0.05$ and two forward/backward passes per step~\citep{foret2021sam}.
 
 \subsection{Results}
-ERM, DAN-DG, SAM comparison (mean-source, worst-source, Sketch
-accuracy/macro-F1, change vs.\ ERM); source-domain separability; sharpness
-proxy $\Delta_\text{sharp}$; per-class Sketch changes; controlled
-$\lambda_\text{DG}$ or $\rho$ study.
+
+\paragraph{Main comparison.}
+Table~\ref{tab:t3-main} reports source and target performance for all three methods. Both DAN-DG and SAM improve over ERM on every metric, SAM by the largest margin, despite the three methods' source mean macro-F1 spanning only 0.8 points.
+
+\begin{table}[t]
+  \caption{Per-source-domain validation accuracy, all three Task~3 methods. ERM's row is identical to Task~2's Source-only (Table~\ref{tab:t2-perdomain}), since it is the same reused checkpoint.}
+  \label{tab:t3-perdomain}
+  \centering
+  \footnotesize
+  \begin{tabular}{lccc}
+    \toprule
+    Method & Photo & Art Painting & Cartoon \\
+    \midrule
+    ERM     & 0.973 & 0.915 & 0.919 \\
+    DAN-DG  & 0.976 & 0.927 & 0.923 \\
+    SAM     & 0.973 & 0.922 & 0.936 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[t]
+  \caption{Task~3 main comparison. Source-domain separability is 3-way held-out accuracy distinguishing which source domain a feature came from (chance $=1/3$). $\Delta_\text{sharp}$ is the sharpness proxy at $\rho=0.05$.}
+  \label{tab:t3-main}
+  \centering
+  \footnotesize
+  \begin{tabular}{lccccccc}
+    \toprule
+    Method & Source mean F1 & Source worst F1 & Target Acc. & Target F1 & $\Delta$ Target Acc. & Separability & $\Delta_\text{sharp}$ \\
+    \midrule
+    ERM     & 0.937 & 0.915 & 0.640 & 0.660 & --       & 0.880 & 0.2021 \\
+    DAN-DG  & 0.942 & 0.926 & 0.669 & 0.693 & $+0.029$ & 0.767 & 0.2150 \\
+    SAM     & 0.945 & 0.925 & 0.716 & 0.727 & $+0.076$ & 0.890 & 0.1196 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{Per-class analysis.}
+Table~\ref{tab:t3-perclass} shows both methods dramatically correct ERM's worst class, elephant, while breaking dog and person by remarkably similar magnitudes, despite DAN-DG and SAM sharing no mechanism in common (MMD-based alignment versus loss-landscape flatness). Giraffe is the clearest point of divergence: SAM improves it substantially while DAN-DG makes it worse, the opposite of Task~2's target-aware DAN (Table~\ref{tab:t2-perclass}) under the same source-to-target MMD mechanism.
+
+\begin{table}[t]
+  \caption{Per-class Sketch accuracy, ERM baseline vs.\ DAN-DG and SAM.}
+  \label{tab:t3-perclass}
+  \centering
+  \footnotesize
+  \begin{tabular}{lccc}
+    \toprule
+    Class & ERM & DAN-DG & SAM \\
+    \midrule
+    dog      & 0.675 & 0.267 & 0.288 \\
+    elephant & 0.288 & 0.912 & 0.826 \\
+    giraffe  & 0.522 & 0.345 & 0.764 \\
+    guitar   & 0.799 & 0.860 & 0.896 \\
+    horse    & 0.844 & 0.955 & 0.849 \\
+    house    & 0.788 & 0.988 & 0.725 \\
+    person   & 0.931 & 0.663 & 0.688 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Figure~\ref{fig:t3-curves} confirms both methods trained stably throughout, with no instability of the kind observed for Task~2's adversarial methods (Figure~\ref{fig:t2-curves}).
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.78\linewidth]{figures/task3_training_curves.png}
+  \caption{Training curves for DAN-DG and SAM. (a) Classification loss for both methods and DAN-DG's MMD loss, both decline smoothly with no instability, unlike Task~2's DANN/CDAN. (b) Mean source-validation macro-F1 for both methods, converging to a stable plateau above 0.93 by the end of training.}
+  \label{fig:t3-curves}
+\end{figure}
+
+Measured against the same underlying Source-only/ERM checkpoint, Task~2's target-aware DAN improves Sketch accuracy by +7.1 points, while Task~3's target-free DAN-DG improves it by +2.9 points, roughly 2.4$\times$ less.
+
+\paragraph{Controlled study: DAN-DG alignment strength.}
+Table~\ref{tab:t3-controlled} sweeps DAN-DG's $\lambda_\text{DG}$ over $\{0.1, 1, 10\}$. Separability decreases monotonically, but at $\lambda_\text{DG}=10$, source performance, target performance, and sharpness all worsen sharply together, $\Delta_\text{sharp}$ roughly quadrupling over the main setting.
+
+\begin{table}[t]
+  \caption{DAN-DG controlled study over alignment weight $\lambda_\text{DG}$.}
+  \label{tab:t3-controlled}
+  \centering
+  \footnotesize
+  \begin{tabular}{lccccc}
+    \toprule
+    $\lambda_\text{DG}$ & Source mean F1 & Separability & $\Delta_\text{sharp}$ & Target Acc. & Target F1 \\
+    \midrule
+    0.1            & 0.934 & 0.860 & 0.135 & 0.668 & 0.637 \\
+    1.0 (main)     & 0.942 & 0.767 & 0.167 & 0.669 & 0.693 \\
+    10.0           & 0.775 & 0.687 & 0.646 & 0.453 & 0.385 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
 \subsection{Discussion}
-Answer Task 3's four research questions (mean/worst-source predicting
-Sketch; DAN-DG invariance vs.\ class information; SAM sharpness vs.\
-performance ranking; value of unlabeled target access, Task 2 vs.\ Task 3).
 
+\paragraph{RQ1: Do source-side aggregates predict Sketch performance?}
+
+Source mean macro-F1 ranks SAM (0.945) at the top, followed by DAN-DG (0.942) and lastly ERM (0.937), a very tight spread of just 0.8 points between the two ends. Sketch performance ranks them in exactly the same order, but the magnitude difference changes dramatically: SAM stays well ahead at 0.727 over DAN-DG at 0.693 and ERM at 0.660, a 6.7-point spread. So mean and worst source performance can predict the ranking of models correctly, but would genuinely create a large misunderstanding of the magnitude of the difference. Class-level failures end up invisible under aggregation: the dog class collapses by 40 points under both methods, but this large collapse is averaged out by an equally large gain on the elephant class.
+
+\paragraph{RQ2: Does DAN-DG's alignment help, or remove class-discriminative information?}
+
+In the main setting, moving $\lambda_\text{DG}$ from 0.1 to 1 drops separability from 0.880 to 0.767 alongside a small real gain of 2.9 points in Sketch accuracy, so the surface-level answer is yes. The $\lambda_\text{DG}$ sweep at $\lambda_\text{DG}=10$ shows the fuller story: separability keeps dropping even further to 0.687 while Sketch performance collapses to 0.453 and the sharpness proxy explodes fourfold. Pushing separability down harder does not keep helping; past a point it starts destroying information essential to the classifier's predictions. DAN-DG is also not simply a weaker version of Task~2's DAN, the two perform quite differently at the class level: DAN-DG drops Sketch giraffe accuracy while DAN increases it substantially.
+
+\paragraph{RQ3: Does SAM find flatter minima, and does flatness track performance?}
+
+SAM's $\Delta_\text{sharp}$ of 0.1196 is the lowest of the three methods, confirming it found the flatter region it was designed to find. Ranking the methods by flatness places SAM first, matching the ranking by Sketch performance exactly. The $\lambda_\text{DG}$ sweep reinforces this independently: at $\lambda_\text{DG}=10$, sharpness spikes dramatically to 0.646 in the exact setting where Sketch performance collapses, suggesting sharpness and generalization move together in this data not only within SAM's own comparison, but across a controlled range of a completely different method.
+
+\paragraph{RQ4: What does target access buy, and what are the limits of this comparison?}
+
+Task~2's DAN improves Sketch accuracy by +7.1 points with target access; Task~3's DAN-DG improves it by +2.9 points without, roughly a 2.4$\times$ difference from having access to unlabeled Sketch images alone. However, the two methods pursue different objectives: DAN aligns source features directly to target features, while DAN-DG aligns source domains to each other with no target involved at all. Target access is therefore not being cleanly isolated here, two different alignment objectives that share the same underlying loss mechanism (MMD) are being compared, not the same method with one input switched on or off. A clean ablation would require a method that could optionally include or exclude a target term while holding everything else fixed.
 \section{Task 4: Open-Set Recognition}
 \label{sec:task4}
 
-\subsection{Setup}
-CIFAR-10 known classes, CIFAR-100 near/far unknowns; Vanilla, GCSC, PROSER
-(optionally RPL).
+\subsection{Setup and Design Choices}
+
+We treat CIFAR-10's 10 classes as known and evaluate against two fixed, disjoint CIFAR-100 subsets as unknowns, held constant throughout: 8 near classes chosen for semantic overlap with a CIFAR-10 category and 8 far classes with no such overlap, 800 images per group, using CIFAR-100's full per-class test partition with no subsampling. We use a CIFAR-appropriate ResNet-18~\citep{he2016resnet}, replacing the ImageNet-style 7$\times$7 stride-2 first convolution and initial max-pool with a 3$\times$3 stride-1 convolution and no pooling, suited to 32$\times$32 inputs.
+
+Vanilla is trained from random initialization with SGD, cosine-annealed over 100 epochs with no early stopping, saving the checkpoint with the highest validation accuracy. GCSC uses an identical recipe plus RandAugment. PROSER initializes from the selected Vanilla checkpoint, extends its head with 5 dummy classes, and is fine-tuned for 50 epochs with a classifier-placeholder loss ($\beta=1$) and a data-placeholder loss ($\gamma=0.1$) on manifold-mixed features from different-class pairs~\citep{zhou2021proser}. All four post-hoc scores, MSP~\citep{hendrycks2017msp}, MLS~\citep{vaze2022osr}, Energy~\citep{liu2020energy}, and Mahalanobis, are computed from the same cached features and logits for every model, so no score sees different underlying outputs across models. The rejection threshold is calibrated as the 95th percentile of each score on CIFAR-10 validation data, seed 6304 throughout. For PROSER, closed-set accuracy is computed using only the ten known-class logits, so known-class classification and rejection remain distinct.
 
 \subsection{Results}
-MSP/MLS/Energy/Mahalanobis comparison on the vanilla model (near/far/all
-AUROC, calibrated rejection); Vanilla vs.\ GCSC vs.\ PROSER with MLS
-(+ PROSER placeholder score); score-distribution/ROC figure; failure cases.
+
+\paragraph{Post-hoc scores on Vanilla.}
+Table~\ref{tab:t4-scores} reports all four scores evaluated on the Vanilla model. Every score separates known from far-unknown classes substantially more easily than from near-unknown classes. Mahalanobis achieves the best overall and far-unknown AUROC but the worst near-unknown AUROC of the four. Each score's validation-calibrated threshold achieves a known-test acceptance rate close to the intended 95\%, confirming the calibration transfers well from validation to test.
+
+\begin{table}[t]
+  \caption{Post-hoc unknownness scores on the Vanilla model. Threshold is calibrated to the 95th percentile of each score on CIFAR-10 validation data. FPR@95TPR is the fraction of unknowns accepted under that same threshold.}
+  \label{tab:t4-scores}
+  \centering
+  \footnotesize
+  \begin{tabular}{lccccccc}
+    \toprule
+    Score & AUROC (near) & AUROC (far) & AUROC (all) & Known Test Accept. & FPR@95TPR (near) & FPR@95TPR (far) \\
+    \midrule
+    MSP         & 0.801 & 0.894 & 0.847 & 0.947  & 0.759 & 0.580 \\
+    MLS         & 0.786 & 0.893 & 0.840 & 0.951  & 0.705 & 0.476 \\
+    Energy      & 0.786 & 0.894 & 0.840 & 0.952  & 0.714 & 0.466 \\
+    Mahalanobis & 0.784 & 0.917 & 0.851 & 0.947  & 0.741 & 0.486 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/task4_score_distributions.png}
+  \caption{Score distributions on the Vanilla model for known (CIFAR-10 test), near-unknown, and far-unknown examples. MLS shows the clearest separation, with far-unknown mass shifted well above the known distribution while near-unknown mass overlaps it substantially. Mahalanobis shows a similar pattern in feature space: far-unknown distances spread much further from the known cluster than near-unknown distances do.}
+  \label{fig:t4-dist}
+\end{figure}
+
+\paragraph{Model comparison.}
+Table~\ref{tab:t4-models} compares Vanilla, GCSC, and PROSER using MLS as a common score, plus PROSER's own placeholder-based score (total softmax probability mass on its 5 dummy classes). GCSC improves over Vanilla on every metric simultaneously. Neither PROSER variant matches GCSC, and PROSER's placeholder score, while better than its own MLS score overall, is worse than Vanilla's MLS score specifically on near-unknowns.
+
+\begin{table}[t]
+  \caption{Closed-set accuracy (CSA) and open-set metrics for Vanilla, GCSC, and PROSER. PROSER's CSA uses only its ten known-class logits.}
+  \label{tab:t4-models}
+  \centering
+  \footnotesize
+  \begin{tabular}{lccccc}
+    \toprule
+    Model (score) & CSA & AUROC (near) & AUROC (far) & AUROC (all) & Known Test Accept. \\
+    \midrule
+    Vanilla (MLS)              & 0.9455 & 0.786 & 0.893 & 0.840 & 0.951 \\
+    GCSC (MLS)                 & 0.9515 & 0.812 & 0.905 & 0.858 & 0.953 \\
+    PROSER (MLS)               & 0.9424 & 0.768 & 0.874 & 0.821 & 0.952 \\
+    PROSER (placeholder score) & 0.9424 & 0.748 & 0.918 & 0.833 & 0.954 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{Failure cases.}
+Table~\ref{tab:t4-failures} shows representative near- and far-unknown images accepted by Vanilla's MLS-calibrated threshold. Near-unknown failures consistently land on the semantically closest known class; far-unknown failures show no comparable pattern.
+
+\begin{table}[t]
+  \caption{Representative false negatives (unknown images accepted as known) under Vanilla's MLS threshold.}
+  \label{tab:t4-failures}
+  \centering
+  \footnotesize
+  \begin{tabular}{llcc}
+    \toprule
+    True class & Predicted known class & Score & Threshold \\
+    \midrule
+    wolf (near)         & cat        & $-8.924$ & $-5.792$ \\
+    pickup\_truck (near) & automobile & $-6.881$ & $-5.792$ \\
+    pickup\_truck (near) & truck      & $-7.309$ & $-5.792$ \\
+    leopard (near)      & cat        & $-8.681$ & $-5.792$ \\
+    camel (near)        & horse      & $-7.440$ & $-5.792$ \\
+    chair (far)         & airplane   & $-7.824$ & $-5.792$ \\
+    bottle (far)        & bird       & $-8.826$ & $-5.792$ \\
+    bowl (far)          & truck      & $-7.537$ & $-5.792$ \\
+    clock (far)         & ship       & $-5.843$ & $-5.792$ \\
+    bowl (far)          & dog        & $-6.394$ & $-5.792$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
 \subsection{Discussion}
-Answer Task 4's four research questions (semantic similarity and rejection;
-what each score captures; GCSC's effect on CSA vs.\ OSR; PROSER's
-placeholder trade-off).
 
-\section{Cross-Task Discussion}
-Visual cues and distribution shift; invariance vs.\ discriminability; the
-importance of target-domain access; recognition vs.\ rejection; overall
-synthesis of what a robust representation should preserve, suppress, and
-reject.
+\paragraph{RQ1: Effect of semantic similarity on rejection}
+
+Semantic similarity does directly affect rejection in practice, not just in theory. AUROC is in the 0.78-0.80 range for near-unknowns and jumps to 0.89-0.92 for far-unknowns, a solid 10-point-plus gap. This gap is consistent across every scoring method tested, which suggests it is a property of the representation or task itself rather than of any single score. The failure-case table shows wolf and leopard absorbed into cat, and camel into horse, and pickup\_truck into truck; these are not random errors, every one is the semantically nearest known class. Far-unknowns show no such pattern, chair to airplane and bowl to dog have no discernible relationship.
+
+\paragraph{RQ2: What each score captures}
+
+MSP, MLS, and Energy move together in near-lockstep across every comparison. Fundamentally, all three ask the same question, how peaked is the network's output distribution, with varying approximations: MSP normalizes via softmax, MLS keeps the raw logit scale, and Energy uses all logits via log-sum-exp rather than only the maximum. Mahalanobis is the clear outlier, best on far-unknowns but worst on near-unknowns. Mahalanobis asks how far a feature sits from the nearest known class's average location, a purely geometric, distribution-based question with no reference to how the classifier's decision boundary is actually drawn. A near-unknown can sit reasonably close to a known class's feature cluster even while still being confidently and incorrectly classified, so distance alone may not be a sensitive enough tool for this harder discrimination, while a confidence-based score can sometimes catch this subtler hesitation in the classifier's own decision.
+
+\paragraph{RQ3: Does augmentation trade off CSA against OSR?}
+
+GCSC beats Vanilla on every metric simultaneously: CSA (+0.6 points), near AUROC (+2.6 points), and far AUROC (+1.2 points). There is no trade-off, both closed-set accuracy and open-set rejection improve together. The near-unknown improvement is roughly twice the far-unknown improvement in absolute terms. This is plausibly because stronger augmentation forces the model to learn more robust, less superficial features during training, RandAugment prevents the model from relying on easy surface-level shortcuts, and these more robust features matter most precisely where discrimination is hardest, on near-unknowns, rather than where it was already easy.
+
+\paragraph{RQ4: Does PROSER improve rejection, and where does it fall short?}
+
+PROSER's own placeholder score (0.833 overall) beats its own MLS score (0.821), so the mechanism is not useless, it adds signal beyond ordinary confidence. However, neither PROSER variant beats GCSC, so the added architectural complexity does not pay off relative to the simpler approach of training with stronger augmentation. PROSER's CSA (0.9424) is the lowest of the three models, a real, if small, closed-set cost. PROSER's placeholder score is worse than plain Vanilla's MLS score on near-unknowns (0.748 vs.\ 0.786) while being clearly better on far-unknowns (0.918), which points to exactly where the manufactured proxy breaks down: a manifold-mixed blend of two known, dissimilar classes produces something that resembles a generic, poorly-defined far unknown reasonably well, but does not resemble a coherent, realistic near-unknown, which is why the mechanism specifically underperforms on the harder case it would most need to help with.
+
+\section{Cross-Task Synthesis}
+\label{sec:synthesis}
+
+\subsection{Visual Cues and Distribution Shift}
+
+Sketch images are close to pure outline and shape, with little to no texture and quite different color statistics compared to Photo, Art, and Cartoon. Task~1 found that ResNet-50-family CNNs lean texture-biased (Section~\ref{sec:task1}), and a domain shift like Sketch, which strips away texture almost entirely, should be particularly punishing for a texture-reliant strategy. Source-only's catastrophic failure on the elephant class (0.288 accuracy, Section~\ref{sec:task2}) is a plausible example of this: an elephant's texture, its skin folds and coloring, is likely more load-bearing for recognizing it than a class like guitar, whose more shape-defined silhouette should survive a texture-stripping shift more easily. This connection is qualitative rather than a controlled test, Task~1 used STL-10 with frozen backbones while Tasks~2 and~3 used PACS with a fully fine-tuned ResNet-18, but the pattern is at least consistent with what Task~1's cue-reliance findings would predict.
+
+\subsection{Invariance versus Discriminability}
+
+Tasks~2 and~3 both tested the same underlying question with different methods, and both found the same answer. In Task~2's $\lambda_\text{MMD}$ sweep, pushing alignment harder past a certain point actively hurt performance, an inverted-U rather than a straight line. In Task~3, this exact same pattern reappeared under a different method: DAN-DG's $\lambda_\text{DG}$ sweep showed separability improving monotonically while target performance collapsed at $\lambda_\text{DG}=10$. SAM reinforces the same point from a different angle: it achieved the best Sketch performance of any Task~3 method without any domain-alignment term at all, showing invariance is not the only path to generalization. Together, this suggests domain separability only helps up to a point; once alignment pressure starts removing features the classifier needs for class identification rather than just domain-specific noise, it begins to hurt rather than help.
+
+\subsection{The Importance of Target-Domain Access}
+
+Task~2's DAN (target-aware) improved Sketch accuracy by +7.1 points; Task~3's DAN-DG (target-free) improved it by +2.9 points, using the same underlying MMD mechanism. Target access was worth roughly 2.4$\times$ the improvement here. However, this is not a clean ablation of one method with a single input switched off: DAN aligns source features to target features directly, while DAN-DG aligns the source domains closer to each other. These are meaningfully different objectives that happen to share the same loss family, not the same method tested with and without target data.
+
+\subsection{Recognition versus Rejection}
+
+GCSC beats Vanilla on every single metric, closed-set accuracy, near-unknown AUROC, and far-unknown AUROC, with no trade-off anywhere (Section~\ref{sec:task4}). This suggests a better closed-set representation also rejects better. RandAugment's benefit was roughly double on near-unknowns compared to far-unknowns, suggesting the connection between representation quality and rejection is strongest exactly where rejection is hardest. PROSER, on the other hand, sacrifices a small amount of closed-set accuracy in exchange for a different, dedicated rejection mechanism, so improving recognition is not the only viable route to better rejection.
+
+\subsection{Overall Synthesis}
+
+Taken together, these results point to three things a robust representation should do. It should preserve the cues that Task~1 showed to be more stable, shape and class-identity, rather than the more brittle, superficial cues a model happens to pick up first, such as texture, since these are what the model relies on most before making a prediction and what survives interventions the best. It should become invariant to domain-specific style only up to the point where that invariance stops interfering with the features actually needed for class identification, Tasks~2 and~3 both show that reducing domain separability helps only while doing so does not erase or tamper with those class-essential features, and starts to hurt once it does. Finally, a model should reject an input rather than guess whenever it lacks genuine confidence that the input belongs to any known class, Task~4 shows this is far easier when a model is confident about what does, and by extension does not, belong to a class, and correspondingly harder for semantically close unknowns where that confidence is less reliable.
 
 \section{Conclusion}
-Summarize the cross-task synthesis argument.
 
-\begin{ack}
-Optional: acknowledge any TA/instructor help, compute resources, etc. (Not
-required for a course assignment; remove this section if you have nothing
-to declare.)
-\end{ack}
+Across four tasks, we find the same underlying pattern: a model reaching strong in-distribution accuracy tells us little about which strategy it used to get there, and that strategy determines how it fails once the IID assumption breaks. Task~1 showed CLIP and ViT-B/16 rely more on shape than ResNet-50 does, yet this reliance does not transfer to robustness against spatial disruption, where CLIP was the least stable of the three. Task~2 showed that alignment only helps when it succeeds at its own objective, DAN reduced domain separability and improved target accuracy, while DANN and CDAN failed to reduce separability at all under an identical protocol and underperformed even the unadapted baseline. Task~3 showed that generalization to a fully unseen domain does not require target access at all, SAM's pursuit of flat minima outperformed both ERM and DAN-DG without ever aligning domains, while confirming, through DAN-DG's own controlled sweep, that alignment pushed too far actively destroys class-discriminative information. Task~4 showed that rejecting unfamiliar inputs is a separate problem from recognizing familiar ones, every score tested struggled far more with semantically close unknowns than distant ones, and a stronger closed-set representation (GCSC) improved rejection without any trade-off, while a dedicated rejection mechanism (PROSER) achieved a different trade-off entirely. A robust representation, by this evidence, is one that is invariant to superficial shifts without losing what makes classes distinct, and one that knows the difference between the two.
 
-\section*{References}
-Use \verb+\citet+/\verb+\citep+ with a \texttt{.bib} file (natbib is loaded
-by default) rather than hand-formatting references. References do not
-count toward the 8-page limit. At minimum, cite: Geirhos et al. (2019),
-Ganin et al. (2016), Long et al. (2018), Foret et al. (2021), Vaze et al.
-(2022), Zhou et al. (2021), plus any optional readings you used.
 
-\appendix
-\section{Appendix (optional)}
-Implementation details or extra results only -- not required reading for
-graders and cannot substitute for required evidence in the main text.
+\renewcommand{\bibfont}{\footnotesize}
+\bibliographystyle{plainnat}
+\bibliography{references}
 
 \end{document}
